@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -19,6 +19,8 @@ import AddDebtsScreen from '../screens/AddDebtsScreen';
 import UpdateDebtScreen from '../screens/UpdateDebtScreen';
 import EverydayTransactionScreen from '../screens/EverydayTransactionScreen';
 import UpdateDebtorScreen from '../screens/UpdateDebtorScreen';
+import {bootTimeMeasurement} from '../utils/bootTimeMeasurement';
+import logger from '../utils/logger';
 
 const screenOptions = {
   headerShown: false,
@@ -26,12 +28,7 @@ const screenOptions = {
 
 const HomeIcon = ({color}: any) => (
   <View style={{alignItems: 'center'}}>
-    <Icon
-      name={'home'}
-      size={28}
-      type={'MaterialIcons'}
-      color={color}
-    />
+    <Icon name={'home'} size={28} type={'MaterialIcons'} color={color} />
     <Text style={[styles.labelText, {color: color}]}>Home</Text>
   </View>
 );
@@ -128,6 +125,10 @@ const TabStack = () => {
 };
 
 const HomeStack = () => {
+  logger.rerender('HomeStack');
+  useEffect(() => {
+    bootTimeMeasurement.finish();
+  }, []);
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name="TabStack" component={TabStack} />

@@ -2,12 +2,14 @@ import {ActivityIndicator, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import PrimaryView from './PrimaryView';
 import {Colors} from '../../hooks/useThemeColors';
+import logger from '../../utils/logger';
 
 interface CustomLoaderProps {
   colors: Colors;
 }
 
 const CustomLoader: React.FC<CustomLoaderProps> = ({colors}) => {
+  logger.rerender('CustomLoader');
   return (
     <PrimaryView
       colors={colors}

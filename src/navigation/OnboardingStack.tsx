@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SplashScreen from '../screens/SplashScreen';
 import PersonalizeScreen from '../screens/PersonalizeScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -6,6 +6,8 @@ import OnboardingScreen from '../screens/OnboardingScreen';
 import ChooseCurrencyScreen from '../screens/ChooseCurrencyScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import ExistingUserScreen from '../screens/ExistingUserScreen';
+import {bootTimeMeasurement} from '../utils/bootTimeMeasurement';
+import logger from '../utils/logger';
 
 const screenOptions = {
   headerShown: false,
@@ -14,6 +16,10 @@ const screenOptions = {
 const Stack = createNativeStackNavigator();
 
 const OnboardingStack = () => {
+  logger.rerender('OnboardingStack');
+  useEffect(() => {
+    bootTimeMeasurement.finish();
+  }, []);
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name="SplashScreen" component={SplashScreen} />

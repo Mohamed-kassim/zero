@@ -9,8 +9,10 @@ import HomeStack from './HomeStack';
 import OnboardingStack from './OnboardingStack';
 import useThemeColors from '../hooks/useThemeColors';
 import CustomLoader from '../components/atoms/CustomLoader';
+import logger from '../utils/logger';
 
 const MainStack = () => {
+  logger.rerender('MainStack');
   const dispatch = useDispatch();
   const colors = useThemeColors();
   const isOnboarded = useSelector(selectIsOnboarded);
