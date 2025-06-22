@@ -16,11 +16,9 @@ const MainStack = () => {
   const dispatch = useDispatch();
   const colors = useThemeColors();
   const isOnboarded = useSelector(selectIsOnboarded);
+  console.log('🚀 ~ MainStack ~ isOnboarded:', isOnboarded);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [stack, setStack] = useState(null);
-
-  console.log('isOnboarded', isOnboarded);
+  console.log('🚀 ~ MainStack ~ isLoading:', isLoading);
 
   useEffect(() => {
     const getIsOnboarded = async () => {
@@ -50,14 +48,14 @@ const MainStack = () => {
     getIsOnboarded();
   }, [isOnboarded, dispatch]);
 
-  useEffect(() => {
-    const newStack = isOnboarded ? <HomeStack /> : <OnboardingStack />;
-    setStack(newStack);
-  }, [isOnboarded]);
+  if (isLoading) {
+    return <CustomLoader colors={colors} />;
+  }
 
-  const memoizedStack = useMemo(() => stack, [stack]);
-
-  return isLoading ? <CustomLoader colors={colors} /> : memoizedStack;
+  if (!isOnboarded) {
+    return <OnboardingStack />;
+  }
+  return <HomeStack />;
 };
 
 export default MainStack;
