@@ -24,8 +24,9 @@ import {createExpense} from '../../services/ExpenseService';
 import {createDebt} from '../../services/DebtService';
 import {getExpenseRequest} from '../../redux/slice/expenseDataSlice';
 import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';
-import AsyncStorageService from '../../utils/asyncStorageService';
+
 import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
+import Storage from '../../utils/storage';
 
 const useExistingUser = () => {
   const colors = useThemeColors();
@@ -235,7 +236,7 @@ const useExistingUser = () => {
       dispatch(getExpenseRequest());
       dispatch(getAllDebtRequest());
 
-      await AsyncStorageService.setItem('isOnboarded', JSON.stringify(true));
+      Storage.setItem('isOnboarded', JSON.stringify(true));
       dispatch(setIsOnboarded(true));
     }
   };

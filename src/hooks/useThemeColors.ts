@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
-import AsyncStorageService from '../utils/asyncStorageService';
+
 import useColorScheme from './useColorScheme';
 import {useSelector} from 'react-redux';
 import {selectThemePreference} from '../redux/slice/themePreferenceSlice';
+import Storage from '../utils/storage';
 
 export interface Colors {
   primaryBackground: string;
@@ -41,7 +42,7 @@ const Colors = {
     sameBlack: '#000000',
     sameWhite: '#FAFBF7',
     accentRed: '#FF8C6B',
-    lightAccent: '#FAFBF7'
+    lightAccent: '#FAFBF7',
   },
   dark: {
     primaryBackground: '#0F0F0F',
@@ -60,7 +61,7 @@ const Colors = {
     sameBlack: '#000000',
     sameWhite: '#FAFBF7',
     accentRed: '#FF6347',
-    lightAccent: '#313131'
+    lightAccent: '#313131',
   },
 };
 
@@ -70,7 +71,7 @@ const useThemeColors = () => {
   const [theme, setTheme] = useState<string | null>(null);
 
   async function fetchTheme() {
-    const storedTheme = await AsyncStorageService.getItem('themePreference');
+    const storedTheme = Storage.getItem('themePreference');
     setTheme(storedTheme);
   }
 

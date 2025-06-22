@@ -16,7 +16,7 @@ import {useEffect, useState} from 'react';
 import currencies from '../../../assets/jsons/currencies.json';
 import {getAppVersion} from '../../utils/getVersion';
 import useThemeColors from '../../hooks/useThemeColors';
-import AsyncStorageService from '../../utils/asyncStorageService';
+import Storage from '../../utils/storage';
 import {updateUserById} from '../../services/UserService';
 import {updateCurrencyById} from '../../services/CurrencyService';
 import {Linking} from 'react-native';
@@ -66,7 +66,7 @@ const useSettings = () => {
   useEffect(() => {
     const getThemePreference = async () => {
       try {
-        const theme = await AsyncStorageService.getItem('themePreference');
+        const theme = Storage.getItem('themePreference');
         if (theme === null) {
           dispatch(setThemePreference('system'));
         } else {
@@ -104,7 +104,7 @@ const useSettings = () => {
         dispatch(setThemePreference(theme));
       }
       setIsThemeModalVisible(false);
-      await AsyncStorageService.setItem('themePreference', theme);
+      Storage.setItem('themePreference', theme);
     } catch (error) {
       console.error('Error saving theme preference:', error);
     }
@@ -182,7 +182,7 @@ const useSettings = () => {
 
   const handleDeleteAllDataOk = async () => {
     await deleteAllData();
-    await AsyncStorageService.setItem('isOnboarded', JSON.stringify(false));
+    Storage.setItem('isOnboarded', JSON.stringify(false));
     dispatch(setIsOnboarded(false));
   };
   const handleDeleteAllDataCancel = () => {

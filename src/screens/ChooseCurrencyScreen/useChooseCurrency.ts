@@ -3,10 +3,11 @@ import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectUserId} from '../../redux/slice/userIdSlice';
 import {createCurrency} from '../../services/CurrencyService';
-import AsyncStorageService from '../../utils/asyncStorageService';
+
 import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
 import currencies from '../../../assets/jsons/currencies.json';
 import Currency from '../../schemas/CurrencySchema';
+import Storage from '../../utils/storage';
 
 const useChooseCurrency = () => {
   const colors = useThemeColors();
@@ -28,7 +29,7 @@ const useChooseCurrency = () => {
         Realm.BSON.ObjectID.createFromHexString(userId),
       );
 
-      await AsyncStorageService.setItem('isOnboarded', JSON.stringify(true));
+      Storage.setItem('isOnboarded', JSON.stringify(true));
       dispatch(setIsOnboarded(true));
     }
   };

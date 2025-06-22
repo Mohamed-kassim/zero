@@ -2,13 +2,29 @@ import {configureStore} from '@reduxjs/toolkit';
 import rootReducer from './rootReducer';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistReducer, persistStore} from 'redux-persist';
 
+import {persistReducer, persistStore} from 'redux-persist';
+import {Storage} from 'redux-persist';
+import {storage} from '../utils/storage';
+
+export const reduxStorage: Storage = {
+  setItem: (key, value) => {
+    storage.set(key, value);
+    return Promise.resolve(true);
+  },
+  getItem: key => {
+    const value = storage.getString(key);
+    return Promise.resolve(value);
+  },
+  removeItem: key => {
+    storage.delete(key);
+    return Promise.resolve();
+  },
+};
 const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
-  storage: AsyncStorage,
+  storage: reduxStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
