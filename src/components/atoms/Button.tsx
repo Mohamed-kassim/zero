@@ -6,6 +6,7 @@ import {
   ViewStyle,
   StyleProp,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 import PrimaryText from './PrimaryText';
@@ -15,6 +16,7 @@ interface ButtonProps extends PressableProps {
   onPress(): void;
   title: string;
   disabled?: boolean;
+  loading?: boolean;
   variant?: 'primary' | 'secondary';
 }
 
@@ -22,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   title,
   disabled,
   style,
+  loading = false,
   variant = 'primary',
   ...props
 }) => {
@@ -29,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <View style={styles.buttonContainer}>
       <Pressable
-        disabled={disabled}
+        disabled={disabled || loading}
         style={({pressed}) =>
           [
             styles.button,
@@ -62,11 +65,16 @@ const Button: React.FC<ButtonProps> = ({
         }
         // Accessibility
         accessibilityRole="button"
-        accessibilityState={{disabled}}
+        accessibilityState={{disabled: disabled || loading, busy: loading}}
         {...props}>
-        <PrimaryText style={[styles.buttonText, {color: colors.buttonText}]}>
-          {title}
-        </PrimaryText>
+        <View style={styles.buttonContent}>
+          {loading && (
+            <ActivityIndicator size="small" color={colors.buttonText} />
+          )}
+          <PrimaryText style={[styles.buttonText, {color: colors.buttonText}]}>
+            {title}
+          </PrimaryText>
+        </View>
       </Pressable>
     </View>
   );
@@ -99,6 +107,12 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
       },
     }),
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
   },
   buttonText: {
     fontSize: 16,
