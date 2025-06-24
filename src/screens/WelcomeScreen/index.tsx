@@ -5,31 +5,29 @@ import PrimaryText from '../../components/atoms/PrimaryText';
 import PrimaryButton from '../../components/atoms/PrimaryButton';
 import Carousel from '../../components/atoms/Carousel';
 import useWelcome from './useWelcome';
+import {styles} from './styles';
 
 const WelcomeScreen = () => {
-  const {colors, handleAllreadyUser, handleNewUser} = useWelcome();
+  const {colors, handleExistingUser, handleNewUser} = useWelcome();
 
   return (
-    <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
-      <View style={{paddingTop: '15%'}}>
-        <PrimaryText style={{fontSize: 24}}>
+    <PrimaryView colors={colors} style={styles.container}>
+      <View style={styles.titleContainer}>
+        <PrimaryText style={styles.title}>
           Welcome to <Text style={{color: colors.accentGreen}}>zero</Text>
         </PrimaryText>
       </View>
 
       <Carousel />
 
-      <View style={{marginBottom: '10%'}}>
+      <View style={styles.buttonContainer}>
         <PrimaryButton
-          onPress={handleAllreadyUser}
+          onPress={handleExistingUser}
           colors={colors}
           buttonTitle={'Existing User'}
           disabled={undefined}
         />
-        <PrimaryText
-          style={{textAlign: 'center', marginTop: '2%', marginBottom: '2%'}}>
-          or
-        </PrimaryText>
+        <PrimaryText style={styles.orText}>or</PrimaryText>
         <PrimaryButton
           onPress={handleNewUser}
           colors={colors}
