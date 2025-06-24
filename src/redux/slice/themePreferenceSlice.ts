@@ -1,8 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../rootReducer';
 
-const initialState = {
-  theme: null,
+type ThemePreference = 'system' | 'dark' | 'light';
+interface ThemePreferenceState {
+  theme: ThemePreference;
+}
+const initialState: ThemePreferenceState = {
+  theme: 'system',
 };
 
 const themePreferenceSlice = createSlice({

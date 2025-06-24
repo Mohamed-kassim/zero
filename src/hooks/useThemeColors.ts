@@ -1,9 +1,7 @@
-import {useEffect, useState} from 'react';
-
 import useColorScheme from './useColorScheme';
 import {useSelector} from 'react-redux';
 import {selectThemePreference} from '../redux/slice/themePreferenceSlice';
-import Storage from '../utils/storage';
+import {useMemo} from 'react';
 
 export interface Colors {
   primaryBackground: string;
@@ -66,28 +64,21 @@ const Colors = {
 };
 
 const useThemeColors = () => {
-  const selectedTheme = useSelector(selectThemePreference);
+  const selectedThemePreference = useSelector(selectThemePreference);
+
   const colorScheme = useColorScheme();
-  const [theme, setTheme] = useState<string | null>(null);
+  const colors = useMemo(() => {
+    if (
+      selectedThemePreference === 'system' ||
+      selectedThemePreference === null
+    ) {
+      return Colors[colorScheme];
+    } else {
+      return Colors[selectedThemePreference];
+    }
+  }, [selectedThemePreference, colorScheme]);
 
-  async function fetchTheme() {
-    const storedTheme = Storage.getItem('themePreference');
-    setTheme(storedTheme);
-  }
-
-  useEffect(() => {
-    fetchTheme();
-  }, [selectedTheme]);
-
-  if (theme === 'system') {
-    return Colors[colorScheme];
-  } else if (theme === 'dark') {
-    return Colors[theme];
-  } else if (theme === 'light') {
-    return Colors[theme];
-  } else {
-    return Colors[colorScheme];
-  }
+  return colors;
 };
 
 export default useThemeColors;
