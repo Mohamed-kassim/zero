@@ -1,17 +1,16 @@
-import {StyleSheet, Text, TextStyle} from 'react-native';
+import {StyleProp, StyleSheet, Text, TextStyle} from 'react-native';
 import React, {ReactNode} from 'react';
 import useThemeColors from '../../hooks/useThemeColors';
 
 interface PrimaryTextProps {
   children?: ReactNode;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
 }
 
 const PrimaryText: React.FC<PrimaryTextProps> = ({children, style}) => {
   const colors = useThemeColors();
-  const textColor = style?.color ?? colors.primaryText;
   return (
-    <Text style={[styles.primaryText, style, {color: textColor}]}>
+    <Text style={[styles.primaryText, {color: colors.primaryText}, style]}>
       {children}
     </Text>
   );
