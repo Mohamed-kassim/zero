@@ -27,7 +27,7 @@ import {FETCH_ALL_CATEGORY_DATA} from '../../redux/actionTypes';
 import mainStyles from '../../styles/main';
 import {categorySchema} from '../../utils/validationSchema';
 import onboardingStyles from '../../screens/OnboardingScreen/style';
-import Category from '../../schemas/CategorySchema';
+import Category from '../../db/schemas/CategorySchema';
 import defaultCategories from '../../../assets/jsons/defaultCategories.json';
 import {selectCategoryData} from '../../redux/slice/categoryDataSlice';
 

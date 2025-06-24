@@ -6,7 +6,7 @@ import {createCurrency} from '../../services/CurrencyService';
 
 import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
 import currencies from '../../../assets/jsons/currencies.json';
-import Currency from '../../schemas/CurrencySchema';
+import Currency from '../../db/schemas/CurrencySchema';
 import Storage from '../../utils/storage';
 
 const useChooseCurrency = () => {

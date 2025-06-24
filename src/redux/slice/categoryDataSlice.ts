@@ -1,6 +1,6 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../rootReducer';
-import Category from '../../schemas/CategorySchema';
+import Category from '../../db/schemas/CategorySchema';
 
 const initialState = {
   categoryData: [],
@@ -11,7 +11,7 @@ const categoryDataSlice = createSlice({
   initialState,
   reducers: {
     setCategoryData: (state, action) => {
-      console.log("hhhh", action.payload);
+      console.log('hhhh', action.payload);
       state.categoryData = action.payload;
     },
   },

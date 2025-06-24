@@ -1,7 +1,7 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Icon from '../atoms/Icons';
-import Category from '../../schemas/CategorySchema';
+import Category from '../../db/schemas/CategorySchema';
 import PrimaryText from '../atoms/PrimaryText';
 import useThemeColors from '../../hooks/useThemeColors';
 

@@ -5,7 +5,7 @@ import {selectUserId} from '../../redux/slice/userIdSlice';
 import {navigate} from '../../utils/navigationUtils';
 import {FETCH_ALL_USER_DATA} from '../../redux/actionTypes';
 import {createCategory} from '../../services/CategoryService';
-import Category from '../../schemas/CategorySchema';
+import Category from '../../db/schemas/CategorySchema';
 
 const useOnboarding = () => {
   const colors = useThemeColors();
@@ -13,7 +13,7 @@ const useOnboarding = () => {
     [],
   );
 
-  console.log(selectedCategories)
+  console.log(selectedCategories);
   const userId = useSelector(selectUserId);
 
   const dispatch = useDispatch();

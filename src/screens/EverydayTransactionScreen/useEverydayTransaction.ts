@@ -3,7 +3,7 @@ import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
 import {RouteProp} from '@react-navigation/native';
-import Expense from '../../schemas/ExpenseSchema';
+import Expense from '../../db/schemas/ExpenseSchema';
 import {useEffect} from 'react';
 import {
   getEverydayExpenseRequest,
@@ -50,7 +50,7 @@ const useEverydayTransaction = (route: EverydayTransactionRouteProp) => {
     expenseDate,
     allEverdayTransaction,
     allEverdayTransactionCopy,
-    totalAmountForTheDay
+    totalAmountForTheDay,
   };
 };
 

@@ -16,7 +16,7 @@ import {
   FETCH_CURRENCY_DATA,
 } from '../../redux/actionTypes';
 import moment from 'moment';
-import Expense from '../../schemas/ExpenseSchema';
+import Expense from '../../db/schemas/ExpenseSchema';
 
 const useHome = () => {
   const colors = useThemeColors();
@@ -118,7 +118,7 @@ const useHome = () => {
     sortedTransactions,
     formatTodaySpent,
     formatYesterdaySpent,
-    formatThisMonthSpent
+    formatThisMonthSpent,
   };
 };
 

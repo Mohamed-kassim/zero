@@ -18,7 +18,7 @@ import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
 import {deleteDebtorById} from '../../services/DebtorService';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
 import moment from 'moment';
-import Debt from '../../schemas/DebtSchema';
+import Debt from '../../db/schemas/DebtSchema';
 import useAmountColor from '../../hooks/useAmountColor';
 import {
   getIndividualDebtorRequest,

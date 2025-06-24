@@ -10,7 +10,7 @@ import CategoryContainer from './CategoryContainer';
 import CustomInput from '../atoms/CustomInput';
 import PrimaryButton from '../atoms/PrimaryButton';
 import {useDispatch, useSelector} from 'react-redux';
-import Category from '../../schemas/CategorySchema';
+import Category from '../../db/schemas/CategorySchema';
 import {selectUserId} from '../../redux/slice/userIdSlice';
 import {createDebtor, updateDebtorById} from '../../services/DebtorService';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
