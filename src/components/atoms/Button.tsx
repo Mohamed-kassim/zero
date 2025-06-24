@@ -1,0 +1,118 @@
+import {
+  Platform,
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+  View,
+} from 'react-native';
+import React from 'react';
+import PrimaryText from './PrimaryText';
+import useThemeColors from '../../hooks/useThemeColors';
+
+interface ButtonProps extends PressableProps {
+  onPress(): void;
+  title: string;
+  disabled?: boolean;
+  variant?: 'primary' | 'secondary';
+}
+
+const Button: React.FC<ButtonProps> = ({
+  title,
+  disabled,
+  style,
+  variant = 'primary',
+  ...props
+}) => {
+  const colors = useThemeColors();
+  return (
+    <View style={styles.buttonContainer}>
+      <Pressable
+        disabled={disabled}
+        style={({pressed}) =>
+          [
+            styles.button,
+            {
+              backgroundColor:
+                variant === 'primary'
+                  ? colors.primaryText
+                  : colors.secondaryText,
+            },
+            // iOS behavior: opacity change
+            Platform.OS === 'ios' && pressed && styles.iosPressed,
+            // Android behavior: slight scale and opacity
+            Platform.OS === 'android' && pressed && styles.androidPressed,
+            disabled && styles.disabled,
+            disabled && {backgroundColor: colors.secondaryText},
+            style,
+          ] as StyleProp<ViewStyle>
+        }
+        // Android ripple effect
+        android_ripple={
+          Platform.OS === 'android'
+            ? {
+                color:
+                  variant === 'primary'
+                    ? colors.primaryText
+                    : colors.secondaryText,
+                borderless: false,
+              }
+            : undefined
+        }
+        // Accessibility
+        accessibilityRole="button"
+        accessibilityState={{disabled}}
+        {...props}>
+        <PrimaryText style={[styles.buttonText, {color: colors.buttonText}]}>
+          {title}
+        </PrimaryText>
+      </Pressable>
+    </View>
+  );
+};
+
+export default Button;
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    overflow: 'hidden',
+    borderRadius: 10,
+    width: '100%',
+  },
+  button: {
+    height: 60,
+    width: '100%',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    overflow: 'hidden',
+    ...Platform.select({
+      android: {
+        elevation: 2,
+      },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+    }),
+  },
+  buttonText: {
+    fontSize: 16,
+  },
+  iosPressed: {
+    opacity: 0.6,
+  },
+  // Android pressed state
+  androidPressed: {
+    opacity: 0.8,
+    transform: [{scale: 0.98}],
+  },
+  disabled: {
+    elevation: 0,
+    shadowOpacity: 0,
+  },
+});

@@ -8,6 +8,7 @@ import {styles} from './styles';
 import useThemeColors from '../../hooks/useThemeColors';
 import {deleteAllData} from '../../services/DeleteService';
 import {navigate} from '../../utils/navigationUtils';
+import Button from '../../components/atoms/Button';
 
 const WelcomeScreen = () => {
   const colors = useThemeColors();
@@ -33,15 +34,17 @@ const WelcomeScreen = () => {
       <Carousel />
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton
+        <Button
+          variant="primary"
           onPress={handleExistingUser}
-          buttonTitle={'Existing User'}
+          title={'Existing User'}
           disabled={undefined}
         />
         <PrimaryText style={styles.orText}>or</PrimaryText>
-        <PrimaryButton
+        <Button
+          variant="secondary"
           onPress={handleNewUser}
-          buttonTitle={'New User'}
+          title={'New User'}
           disabled={undefined}
         />
       </View>
