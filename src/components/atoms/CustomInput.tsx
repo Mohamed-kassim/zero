@@ -2,25 +2,24 @@ import {TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import PrimaryText from './PrimaryText';
 import textInputStyles from '../../styles/textInput';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface CustomInputProps {
   input: string;
   label?: string;
-  colors: Colors;
   placeholder: string;
   setInput: (value: string) => void;
   schema: any;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
-  colors,
   input,
   setInput,
   placeholder,
   label,
   schema,
 }) => {
+  const colors = useThemeColors();
   const [hasInteracted, setHasInteracted] = useState(false);
 
   const errors = hasInteracted
@@ -53,7 +52,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
       />
       {errors.length > 0 && (
         <View style={{marginBottom: 10}}>
-          {errors.map(error => (
+          {errors.map((error: any) => (
             <View key={error.message}>
               <PrimaryText style={{color: colors.accentRed, fontSize: 12}}>
                 {error.message}
