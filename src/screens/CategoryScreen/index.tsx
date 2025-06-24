@@ -1,9 +1,4 @@
-import {
-  RefreshControl,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {RefreshControl, ScrollView, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {navigate} from '../../utils/navigationUtils';
 import Icon from '../../components/atoms/Icons';
@@ -22,7 +17,7 @@ const CategoryScreen = () => {
 
   return (
     <>
-      <PrimaryView colors={colors}>
+      <PrimaryView>
         <View style={{marginBottom: 15}}>
           <HeaderContainer headerText={'Categories'} />
         </View>
@@ -92,17 +87,16 @@ const CategoryScreen = () => {
               ))}
             </View>
           ) : (
-            <EmptyState
-              colors={colors}
-              type={'Categories'}
-              style={{marginTop: '30%'}}
-            />
+            <EmptyState type={'Categories'} style={{marginTop: '30%'}} />
           )}
         </ScrollView>
       </PrimaryView>
       <View style={homeStyles.addButtonContainer}>
         <TouchableOpacity
-          style={[homeStyles.addButton, {backgroundColor: colors.secondaryBackground}]}
+          style={[
+            homeStyles.addButton,
+            {backgroundColor: colors.secondaryBackground},
+          ]}
           onPress={() => navigate('AddCategoryScreen')}>
           <Icon
             name={'shape-plus'}

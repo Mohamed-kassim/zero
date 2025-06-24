@@ -13,7 +13,7 @@ import PrimaryView from '../../components/atoms/PrimaryView';
 import PrimaryText from '../../components/atoms/PrimaryText';
 import mainStyles from '../../styles/main';
 import reportsStyles from '../ReportsScreen/style';
-import { formatCurrency } from '../../utils/numberUtils';
+import {formatCurrency} from '../../utils/numberUtils';
 
 const EverydayTransactionScreen = () => {
   const route = useRoute<EverydayTransactionRouteProp>();
@@ -25,15 +25,14 @@ const EverydayTransactionScreen = () => {
     expenseDate,
     allEverdayTransaction,
     allEverdayTransactionCopy,
-    totalAmountForTheDay
+    totalAmountForTheDay,
   } = useEverydayTransaction(route);
 
   return (
-    <PrimaryView colors={colors}>
+    <PrimaryView>
       <View style={mainStyles.headerContainer}>
         <AppHeader
           onPress={goBack}
-          colors={colors}
           text={formattedDate === undefined ? formattedDate : formatDate}
         />
       </View>
@@ -69,12 +68,11 @@ const EverydayTransactionScreen = () => {
                   justifyContent: 'space-between',
                   flexDirection: 'row',
                   paddingLeft: 10,
-                  paddingRight: 10
+                  paddingRight: 10,
                 },
               ]}>
               <PrimaryText
                 style={{
-                  color: colors.primaryText,
                   fontSize: 13,
                   fontFamily: 'FiraCode-SemiBold',
                   textAlign: 'center',
@@ -83,7 +81,6 @@ const EverydayTransactionScreen = () => {
               </PrimaryText>
               <PrimaryText
                 style={{
-                  color: colors.primaryText,
                   fontSize: 13,
                   fontFamily: 'FiraCode-SemiBold',
                   textAlign: 'center',

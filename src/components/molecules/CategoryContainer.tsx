@@ -3,21 +3,20 @@ import React from 'react';
 import Icon from '../atoms/Icons';
 import Category from '../../schemas/CategorySchema';
 import PrimaryText from '../atoms/PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface CategoryContainerProps {
   categories: Array<Category>;
   toggleCategorySelection(category: Category): void;
-  colors: Colors;
   selectedCategories: Array<Category>;
 }
 
 const CategoryContainer: React.FC<CategoryContainerProps> = ({
   categories,
-  colors,
   toggleCategorySelection,
   selectedCategories,
 }) => {
+  const colors = useThemeColors();
   return (
     <View style={styles.categoryMainContainer}>
       {categories?.map((category: Category) => (

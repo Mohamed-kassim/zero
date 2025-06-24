@@ -140,17 +140,15 @@ const ExpenseEntry: React.FC<ExpenseEntryProps> = ({type, route}) => {
   };
 
   return (
-    <PrimaryView colors={colors}>
+    <PrimaryView>
       <View style={mainStyles.headerContainer}>
         <AppHeader
           onPress={() => goBack(() => dispatch(getExpenseRequest()))}
-          colors={colors}
           text="Transaction Screen"
         />
       </View>
 
       <CustomInput
-        colors={colors}
         input={expenseTitle}
         setInput={setExpenseTitle}
         placeholder="eg. Biryani"
@@ -158,7 +156,6 @@ const ExpenseEntry: React.FC<ExpenseEntryProps> = ({type, route}) => {
         schema={expenseSchema}
       />
       <CustomInput
-        colors={colors}
         input={expenseDescription}
         setInput={setExpenseDescription}
         placeholder="eg. From Aroma's"
@@ -193,7 +190,7 @@ const ExpenseEntry: React.FC<ExpenseEntryProps> = ({type, route}) => {
       </View>
       {expenseAmountError.length > 0 && (
         <View style={{marginBottom: 10}}>
-          {expenseAmountError.map(error => (
+          {expenseAmountError.map((error: any) => (
             <View key={error.message}>
               <PrimaryText style={{color: colors.accentRed, fontSize: 12}}>
                 {error.message}
@@ -212,7 +209,6 @@ const ExpenseEntry: React.FC<ExpenseEntryProps> = ({type, route}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <CategoryContainer
           categories={categories}
-          colors={colors}
           toggleCategorySelection={toggleCategorySelection}
           selectedCategories={selectedCategories}
         />
@@ -220,7 +216,6 @@ const ExpenseEntry: React.FC<ExpenseEntryProps> = ({type, route}) => {
           <SecondaryButton
             onPress={handleAddCategory}
             buttonText="Add More"
-            colors={colors}
             width={100}
           />
         </View>
@@ -228,7 +223,6 @@ const ExpenseEntry: React.FC<ExpenseEntryProps> = ({type, route}) => {
       <View style={styles.submitButtonContainer}>
         <PrimaryButton
           onPress={isAddButton ? handleAddExpense : handleUpdateExpense}
-          colors={colors}
           buttonTitle={type}
           disabled={!isValid}
         />

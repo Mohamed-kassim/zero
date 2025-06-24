@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import PrimaryText from './PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface Label {
   key: string;
@@ -13,11 +13,11 @@ interface Label {
   value: number;
 }
 interface PieChartLabelsProps {
-  colors: Colors;
   slices: Array<Label>;
 }
 
-const PieChartLabels: React.FC<PieChartLabelsProps> = ({colors, slices}) => {
+const PieChartLabels: React.FC<PieChartLabelsProps> = ({slices}) => {
+  const colors = useThemeColors();
   return (
     <View
       style={{

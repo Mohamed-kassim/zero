@@ -67,12 +67,12 @@ const DebtsScreen = () => {
   }
 
   return (
-    <PrimaryView colors={colors}>
+    <PrimaryView>
       <View style={{marginBottom: 15}}>
         <HeaderContainer headerText={'Debts'} />
       </View>
       {debtorsCopy.length === 0 ? (
-        <EmptyState colors={colors} type={'Debts'} style={{marginTop: '30%'}} />
+        <EmptyState type={'Debts'} style={{marginTop: '30%'}} />
       ) : (
         <>
           {overallText}
@@ -230,7 +230,6 @@ const DebtsScreen = () => {
 
           <ScrollView>
             <DebtorList
-              colors={colors}
               debtors={
                 debtorType === 'Person' ? personDebtors : otherAccountsDebtors
               }

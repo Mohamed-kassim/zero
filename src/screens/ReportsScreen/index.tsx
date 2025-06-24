@@ -244,7 +244,7 @@ const ReportsScreen = () => {
     return (
       <View>
         <PieChart style={{height: 200}} data={data} />
-        <PieChartLabels slices={data} colors={colors} />
+        <PieChartLabels slices={data} />
       </View>
     );
   };
@@ -331,7 +331,7 @@ const ReportsScreen = () => {
   };
 
   return (
-    <PrimaryView colors={colors}>
+    <PrimaryView>
       <HeaderContainer headerText={'Reports'} />
       <View
         style={{
@@ -424,11 +424,7 @@ const ReportsScreen = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {filteredTransactions.length === 0 ? (
-          <EmptyState
-            colors={colors}
-            type={'Insights'}
-            style={{marginTop: '20%'}}
-          />
+          <EmptyState type={'Insights'} style={{marginTop: '20%'}} />
         ) : (
           <>
             <View style={styles.chartContainer}>{renderPieChart()}</View>

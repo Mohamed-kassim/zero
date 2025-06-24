@@ -50,7 +50,7 @@ const useCategory = () => {
       console.log('this category is deleting', categoryId);
     }
   };
-  
+
   return {
     colors,
     refreshing,

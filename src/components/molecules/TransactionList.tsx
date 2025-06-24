@@ -1,6 +1,6 @@
 import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import useThemeColors, {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 import Icon from '../atoms/Icons';
 import moment from 'moment';
 import {GestureHandlerRootView, Swipeable} from 'react-native-gesture-handler';
@@ -25,13 +25,12 @@ interface TransactionListProps {
 interface TransactionItemProps {
   currencySymbol: string;
   expense?: Array<Expense>;
-  colors: Colors;
   dispatch: Dispatch<any>;
   label: string;
   targetDate?: string;
 }
 
-const truncateString = (str, maxLength) => {
+const truncateString = (str: string, maxLength: number) => {
   if (str?.length > maxLength) {
     return str.substring(0, maxLength) + '..';
   } else {
@@ -42,11 +41,11 @@ const truncateString = (str, maxLength) => {
 const TransactionItem: React.FC<TransactionItemProps> = ({
   currencySymbol,
   expense: initialExpense,
-  colors,
   dispatch,
   label,
   targetDate,
 }) => {
+  const colors = useThemeColors();
   const [expenses, setExpenses] = useState<Array<Expense>>(initialExpense);
   const [deletedItem, setDeletedItem] = useState<Expense | null>(null);
   const [deletionTimeoutId, setDeletionTimeoutId] = useState<number | null>(
@@ -281,7 +280,6 @@ const TransactionList: React.FC<TransactionListProps> = ({
           key={date}
           currencySymbol={currencySymbol}
           expense={groupedExpenses.get(date) ?? []}
-          colors={colors}
           dispatch={dispatch}
           targetDate={targetDate}
           label={moment(date).calendar(null, {

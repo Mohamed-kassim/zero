@@ -43,7 +43,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <PrimaryView colors={colors}>
+      <PrimaryView>
         <HeaderContainer headerText={`Hey, ${userName}`} />
 
         <ScrollView
@@ -80,7 +80,7 @@ const HomeScreen = () => {
 
               <View>
                 {allTransactions?.length === 0 ? (
-                  <EmptyState colors={colors} type={'Transactions'} />
+                  <EmptyState type={'Transactions'} />
                 ) : (
                   <TransactionList
                     currencySymbol={currencySymbol}

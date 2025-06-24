@@ -1,21 +1,20 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import PrimaryText from './PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface PrimaryButtonProps {
   onPress(): void;
-  colors: Colors;
   buttonTitle: string;
   disabled?: boolean;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onPress,
-  colors,
   buttonTitle,
   disabled,
 }) => {
+  const colors = useThemeColors();
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
       <View

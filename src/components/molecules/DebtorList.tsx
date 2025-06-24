@@ -5,22 +5,21 @@ import {navigate} from '../../utils/navigationUtils';
 import Debtor from '../../schemas/DebtorSchema';
 import Debt from '../../schemas/DebtSchema';
 import PrimaryText from '../atoms/PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
 import {formatCurrency} from '../../utils/numberUtils';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface DebtorListProps {
   currencySymbol: string;
-  colors: Colors;
   debtors: Array<Debtor>;
   allDebts: Array<Debt>;
 }
 
 const DebtorList: React.FC<DebtorListProps> = ({
-  colors,
   debtors,
   allDebts,
   currencySymbol,
 }) => {
+  const colors = useThemeColors();
   const handleDebtor = (
     debtorId: string,
     debtorName: string,

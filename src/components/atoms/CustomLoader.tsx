@@ -8,9 +8,7 @@ const CustomLoader: React.FC = () => {
   logger.rerender('CustomLoader');
   const colors = useThemeColors();
   return (
-    <PrimaryView
-      colors={colors}
-      style={{justifyContent: 'center', alignItems: 'center'}}>
+    <PrimaryView style={{justifyContent: 'center', alignItems: 'center'}}>
       <Image
         source={require('../../../assets/images/zer0.png')}
         style={styles.image}

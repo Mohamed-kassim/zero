@@ -59,7 +59,9 @@ const CategoryEntry: React.FC<CategoryEntryProps> = ({type, route}) => {
   console.log('ggggggggggg', selectedCategories);
   const allCategories = useSelector(selectCategoryData);
 
-  const existingCategoryNames = allCategories.map(category => category.name);
+  const existingCategoryNames = allCategories.map(
+    (category: any) => category.name,
+  );
 
   const filteredCategories = defaultCategories.filter(
     category => !existingCategoryNames.includes(category.name),
@@ -90,8 +92,8 @@ const CategoryEntry: React.FC<CategoryEntryProps> = ({type, route}) => {
       await createCategory(
         category.name,
         Realm.BSON.ObjectID.createFromHexString(userId),
-        category.icon,
-        category.color,
+        category.icon ?? '',
+        category.color ?? '',
       );
     }
     dispatch({type: FETCH_ALL_CATEGORY_DATA});
@@ -217,14 +219,13 @@ const CategoryEntry: React.FC<CategoryEntryProps> = ({type, route}) => {
   };
 
   return (
-    <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
+    <PrimaryView style={{justifyContent: 'space-between'}}>
       <View>
         <View style={mainStyles.headerContainer}>
-          <AppHeader onPress={goBack} colors={colors} text="Add Category" />
+          <AppHeader onPress={goBack} text="Add Category" />
         </View>
 
         <CustomInput
-          colors={colors}
           input={categoryName}
           setInput={setCategoryName}
           placeholder="eg. Stationary"
@@ -350,7 +351,6 @@ const CategoryEntry: React.FC<CategoryEntryProps> = ({type, route}) => {
       <View style={{marginBottom: '10%'}}>
         <PrimaryButton
           onPress={handleAddFromDefaultOrAddCategory}
-          colors={colors}
           buttonTitle={type}
           disabled={!isValid && selectedCategories.length === 0}
         />
@@ -379,7 +379,6 @@ const CategoryEntry: React.FC<CategoryEntryProps> = ({type, route}) => {
               <CustomInput
                 input={searchText}
                 label={undefined}
-                colors={colors}
                 placeholder={'Search Icons'}
                 setInput={setSearchText}
                 schema={undefined}

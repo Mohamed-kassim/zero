@@ -21,7 +21,7 @@ const ChooseCurrencyScreen = () => {
   } = useChooseCurrency();
 
   return (
-    <PrimaryView colors={colors}>
+    <PrimaryView>
       <View style={styles.titleTextContainer}>
         <PrimaryText style={{fontSize: 24}}>Your money,</PrimaryText>
         <PrimaryText style={{fontSize: 24}}>your currency.</PrimaryText>
@@ -75,7 +75,6 @@ const ChooseCurrencyScreen = () => {
       <View style={{marginBottom: 20}}>
         <PrimaryButton
           onPress={handleCurrencySubmit}
-          colors={colors}
           buttonTitle={'Continue'}
         />
       </View>

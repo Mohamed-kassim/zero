@@ -135,7 +135,7 @@ const SettingsScreen = () => {
   };
 
   return (
-    <PrimaryView colors={colors}>
+    <PrimaryView>
       <View style={styles.headerContainer}>
         <View style={styles.greetingsContainer}>
           <View style={styles.iconButtonContainer}>
@@ -385,7 +385,6 @@ const SettingsScreen = () => {
       </Modal>
 
       <ChangeNameModal
-        colors={colors}
         isNameModalVisible={isNameModalVisible}
         handleNameModalClose={handleNameModalClose}
         name={name}
@@ -447,7 +446,6 @@ const SettingsScreen = () => {
               />
               <PrimaryButton
                 onPress={handleCurrencyUpdate}
-                colors={colors}
                 buttonTitle={'Update'}
               />
             </ScrollView>

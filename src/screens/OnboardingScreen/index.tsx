@@ -18,7 +18,7 @@ const OnboardingScreen = () => {
   } = useOnboarding();
 
   return (
-    <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
+    <PrimaryView style={{justifyContent: 'space-between'}}>
       <View>
         <TouchableOpacity
           style={styles.skipButtonContainer}
@@ -81,11 +81,7 @@ const OnboardingScreen = () => {
         </View>
       </View>
       <View style={{marginBottom: '10%'}}>
-        <PrimaryButton
-          onPress={handleSubmit}
-          colors={colors}
-          buttonTitle={'Continue'}
-        />
+        <PrimaryButton onPress={handleSubmit} buttonTitle={'Continue'} />
       </View>
     </PrimaryView>
   );

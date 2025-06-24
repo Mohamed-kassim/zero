@@ -13,7 +13,7 @@ const PersonalizeScreen = () => {
   const isValid = nameSchema.safeParse(name).success;
 
   return (
-    <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
+    <PrimaryView style={{justifyContent: 'space-between'}}>
       <View>
         <TouchableOpacity
           style={styles.skipButtonContainer}
@@ -47,7 +47,6 @@ const PersonalizeScreen = () => {
           <CustomInput
             input={name}
             label={'Name'}
-            colors={colors}
             placeholder={'eg. Indranil Bhuin'}
             setInput={setName}
             schema={nameSchema}
@@ -57,7 +56,6 @@ const PersonalizeScreen = () => {
       <View style={{marginBottom: '10%'}}>
         <PrimaryButton
           onPress={handleSubmit}
-          colors={colors}
           buttonTitle={'Continue'}
           disabled={!isValid}
         />

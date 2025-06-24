@@ -4,11 +4,10 @@ import Debt from '../../schemas/DebtSchema';
 import PrimaryText from '../atoms/PrimaryText';
 import Icon from '../atoms/Icons';
 import moment from 'moment';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 import {formatCurrency} from '../../utils/numberUtils';
 
 interface DebtListProps {
-  colors: Colors;
   handleEditDebt: any;
   handleDeleteDebt: any;
   individualDebts: Array<Debt>;
@@ -16,13 +15,13 @@ interface DebtListProps {
 }
 
 const DebtItem = ({
-  colors,
   handleEditDebt,
   handleDeleteDebt,
   individualDebts,
   label,
   currencySymbol,
 }) => {
+  const colors = useThemeColors();
   return (
     <View>
       <PrimaryText style={{fontSize: 12, marginBottom: 5}}>{label}</PrimaryText>
@@ -48,7 +47,6 @@ const DebtItem = ({
                 }>
                 <PrimaryText
                   style={{
-                    color: colors.primaryText,
                     fontSize: 12,
                     marginRight: 5,
                   }}>
@@ -94,7 +92,6 @@ const DebtList: React.FC<DebtListProps> = ({
       {Array.from(groupedExpenses.keys()).map(date => (
         <DebtItem
           key={date}
-          colors={colors}
           handleEditDebt={handleEditDebt}
           handleDeleteDebt={handleDeleteDebt}
           individualDebts={groupedExpenses.get(date) ?? []}

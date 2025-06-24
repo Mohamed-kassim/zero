@@ -8,19 +8,19 @@ import {navigate} from '../../utils/navigationUtils';
 import PrimaryText from '../atoms/PrimaryText';
 import useSettings from '../../screens/SettingsScreen/useSettings';
 import ChangeNameModal from './ChangeNameModal';
-import { updateUserById } from '../../services/UserService';
-import { selectUserId } from '../../redux/slice/userIdSlice';
+import {updateUserById} from '../../services/UserService';
+import {selectUserId} from '../../redux/slice/userIdSlice';
 
 interface HeaderContainerProps {
   headerText: string;
 }
 
 const HeaderContainer: React.FC<HeaderContainerProps> = ({headerText}) => {
-  const colors = useThemeColors();
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const userId = useSelector(selectUserId);
-  const { handleNameModalClose} = useSettings();
+  const {handleNameModalClose} = useSettings();
+  const colors = useThemeColors();
   const [name, setName] = useState(userName);
   const [isNameModalVisible, setIsNameModalVisible] = useState(false);
 
@@ -80,7 +80,6 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({headerText}) => {
       </View>
 
       <ChangeNameModal
-        colors={colors}
         isNameModalVisible={isNameModalVisible}
         handleNameModalClose={handleNameModalClose}
         name={name}

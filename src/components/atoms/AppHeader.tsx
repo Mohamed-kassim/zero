@@ -2,15 +2,15 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Icon from './Icons';
 import PrimaryText from './PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface AppHeaderProps {
   onPress(): void;
   text: string;
-  colors: Colors;
 }
 
-const AppHeader: React.FC<AppHeaderProps> = ({onPress, colors, text}) => {
+const AppHeader: React.FC<AppHeaderProps> = ({onPress, text}) => {
+  const colors = useThemeColors();
   return (
     <View style={styles.headerContainer}>
       <View style={styles.iconButtonContainer}>

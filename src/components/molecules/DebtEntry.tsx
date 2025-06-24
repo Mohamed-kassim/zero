@@ -110,12 +110,11 @@ const DebtEntry: React.FC<DebtEntryProps> = ({buttonText, route}) => {
   };
 
   return (
-    <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
+    <PrimaryView style={{justifyContent: 'space-between'}}>
       <View>
         <View style={mainStyles.headerContainer}>
           <AppHeader
             onPress={goBack}
-            colors={colors}
             text={`${buttonText} Debt ◦ ${debtorName}`}
           />
         </View>
@@ -200,7 +199,6 @@ const DebtEntry: React.FC<DebtEntryProps> = ({buttonText, route}) => {
         </View>
 
         <CustomInput
-          colors={colors}
           input={debtName}
           setInput={setDebtName}
           placeholder="eg. tea"
@@ -236,7 +234,7 @@ const DebtEntry: React.FC<DebtEntryProps> = ({buttonText, route}) => {
         </View>
         {debtAmountError.length > 0 && (
           <View style={{marginBottom: 10}}>
-            {debtAmountError.map(error => (
+            {debtAmountError.map((error: any) => (
               <View key={error.message}>
                 <PrimaryText style={{color: colors.accentRed, fontSize: 12}}>
                   {error.message}
@@ -256,7 +254,6 @@ const DebtEntry: React.FC<DebtEntryProps> = ({buttonText, route}) => {
       <View style={{marginBottom: '10%'}}>
         <PrimaryButton
           onPress={isAddButton ? handleAddDebt : handleUpdateDebt}
-          colors={colors}
           buttonTitle={buttonText}
           disabled={!isValid}
         />

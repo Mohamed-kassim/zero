@@ -3,16 +3,17 @@ import React from 'react';
 import PrimaryText from '../atoms/PrimaryText';
 import CustomInput from '../atoms/CustomInput';
 import PrimaryButton from '../atoms/PrimaryButton';
-import { nameSchema } from '../../utils/validationSchema';
+import {nameSchema} from '../../utils/validationSchema';
+import useThemeColors from '../../hooks/useThemeColors';
 
 const ChangeNameModal = ({
-  colors,
   isNameModalVisible,
   handleNameModalClose,
   name,
   setName,
   handleNameUpdate,
 }) => {
+  const colors = useThemeColors();
   return (
     <Modal
       animationType="fade"
@@ -23,7 +24,6 @@ const ChangeNameModal = ({
         <View style={[styles.modal, {backgroundColor: colors.containerColor}]}>
           <PrimaryText
             style={{
-              color: colors.primaryText,
               fontSize: 17,
               marginTop: 10,
               marginBottom: 30,
@@ -33,18 +33,13 @@ const ChangeNameModal = ({
           </PrimaryText>
           <View style={{marginBottom: 10}}>
             <CustomInput
-              colors={colors}
               input={name}
               setInput={setName}
               placeholder={'change user name'}
               schema={nameSchema}
             />
           </View>
-          <PrimaryButton
-            onPress={handleNameUpdate}
-            colors={colors}
-            buttonTitle={'Update'}
-          />
+          <PrimaryButton onPress={handleNameUpdate} buttonTitle={'Update'} />
         </View>
       </View>
     </Modal>

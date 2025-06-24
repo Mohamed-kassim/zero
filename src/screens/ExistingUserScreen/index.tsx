@@ -29,10 +29,10 @@ const ExistingUserScreen = () => {
     handleAccessStorageOk,
     handleAccessStorageCancel,
   } = useExistingUser();
-  
+
   return (
     <>
-      <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
+      <PrimaryView style={{justifyContent: 'space-between'}}>
         <View>
           <View style={styles.titleTextContainer}>
             <PrimaryText style={{fontSize: 20}}>
@@ -203,7 +203,6 @@ const ExistingUserScreen = () => {
         <View style={{marginBottom: '10%'}}>
           <PrimaryButton
             onPress={handleDataSubmit}
-            colors={colors}
             buttonTitle={'Continue'}
             disabled={isDisable()}
           />

@@ -65,9 +65,9 @@ const IndividualDebtsScreen = () => {
 
   return (
     <>
-      <PrimaryView colors={colors}>
+      <PrimaryView>
         <View style={mainStyles.headerContainer}>
-          <AppHeader onPress={goBack} colors={colors} text={debtorName} />
+          <AppHeader onPress={goBack} text={debtorName} />
         </View>
         <View
           style={{
@@ -251,7 +251,6 @@ const IndividualDebtsScreen = () => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
           <DebtList
-            colors={colors}
             handleEditDebt={handleEditDebt}
             handleDeleteDebt={handleDeleteDebt}
             individualDebts={

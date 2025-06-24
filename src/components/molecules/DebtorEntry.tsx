@@ -84,10 +84,10 @@ const DebtorEntry: React.FC<DebtorEntryProps> = ({type, route}) => {
   };
 
   return (
-    <PrimaryView colors={colors} style={{justifyContent: 'space-between'}}>
+    <PrimaryView style={{justifyContent: 'space-between'}}>
       <View>
         <View style={mainStyles.headerContainer}>
-          <AppHeader onPress={goBack} colors={colors} text={`${type} Debtor`} />
+          <AppHeader onPress={goBack} text={`${type} Debtor`} />
         </View>
         <PrimaryText style={{marginBottom: 5}}>
           Select Debt Category
@@ -96,14 +96,12 @@ const DebtorEntry: React.FC<DebtorEntryProps> = ({type, route}) => {
         <View style={{marginBottom: 10}}>
           <CategoryContainer
             categories={debtCategories}
-            colors={colors}
             toggleCategorySelection={toggleCategorySelection}
             selectedCategories={selectedCategories}
           />
         </View>
 
         <CustomInput
-          colors={colors}
           input={debtorTitle}
           setInput={setDebtorTitle}
           placeholder="eg. John Doe or Axis"
@@ -114,7 +112,6 @@ const DebtorEntry: React.FC<DebtorEntryProps> = ({type, route}) => {
       <View style={{marginBottom: '10%'}}>
         <PrimaryButton
           onPress={isAddButton ? handleAddDebtor : handleUpdateDebtor}
-          colors={colors}
           buttonTitle={type}
           disabled={!isValid}
         />

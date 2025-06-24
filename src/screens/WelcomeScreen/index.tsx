@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
   const {colors, handleExistingUser, handleNewUser} = useWelcome();
 
   return (
-    <PrimaryView colors={colors} style={styles.container}>
+    <PrimaryView style={styles.container}>
       <View style={styles.titleContainer}>
         <PrimaryText style={styles.title}>
           Welcome to <Text style={{color: colors.accentGreen}}>zero</Text>
@@ -23,14 +23,12 @@ const WelcomeScreen = () => {
       <View style={styles.buttonContainer}>
         <PrimaryButton
           onPress={handleExistingUser}
-          colors={colors}
           buttonTitle={'Existing User'}
           disabled={undefined}
         />
         <PrimaryText style={styles.orText}>or</PrimaryText>
         <PrimaryButton
           onPress={handleNewUser}
-          colors={colors}
           buttonTitle={'New User'}
           disabled={undefined}
         />
