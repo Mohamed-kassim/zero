@@ -6,7 +6,7 @@ import {
   TextStyle,
   View,
 } from 'react-native';
-import React, {forwardRef} from 'react';
+import React from 'react';
 import PrimaryText from './PrimaryText';
 import textInputStyles from '../../styles/textInput';
 import useThemeColors from '../../hooks/useThemeColors';
@@ -38,41 +38,38 @@ const Error = ({
     </Animated.View>
   );
 };
-
-export interface InputProps extends TextInputProps {
+interface InputProps extends TextInputProps {
   label?: string;
-  error?: string;
+
+  errors: string[];
 }
+const Input: React.FC<InputProps> = ({label, errors = [], ...props}) => {
+  const colors = useThemeColors();
 
-const Input = forwardRef<TextInput, InputProps>(
-  ({label, error, ...props}, ref) => {
-    const colors = useThemeColors();
-
-    return (
-      <View style={styles.container}>
-        {label ? <Label label={label} /> : null}
-        <TextInput
-          ref={ref}
-          style={[
-            textInputStyles.textInput,
-            {
-              borderColor: colors.secondaryContainerColor,
-              color: colors.primaryText,
-              backgroundColor: colors.secondaryAccent,
-            },
-          ]}
-          cursorColor={colors.accentGreen}
-          placeholderTextColor={colors.secondaryText}
-          {...props}
-        />
-        {error ? <Error error={error} style={styles.error} /> : null}
-      </View>
-    );
-  },
-);
+  return (
+    <View style={styles.container}>
+      {label ? <Label label={label} /> : null}
+      <TextInput
+        style={[
+          textInputStyles.textInput,
+          {
+            borderColor: colors.secondaryContainerColor,
+            color: colors.primaryText,
+            backgroundColor: colors.secondaryAccent,
+          },
+        ]}
+        placeholderTextColor={colors.secondaryText}
+        {...props}
+      />
+      {errors.length > 0 &&
+        errors.map((error: string) => (
+          <Error key={error} error={error} style={styles.error} />
+        ))}
+    </View>
+  );
+};
 
 export default Input;
-
 const styles = StyleSheet.create({
   textInput: {
     height: 60,
