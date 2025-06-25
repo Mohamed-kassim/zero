@@ -11,6 +11,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@hookform/resolvers": "5.0.0",
     "@react-native-community/datetimepicker": "7.6.1",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
@@ -20,6 +21,7 @@
     "moment": "^2.29.4",
     "patch-package": "8.0.0",
     "react": "18.2.0",
+    "react-hook-form": "^7.58.1",
     "react-native": "0.72.6",
     "react-native-document-picker": "9.1.0",
     "react-native-fs": "^2.20.0",
