@@ -8,6 +8,7 @@ import {
   View,
   ActivityIndicator,
   PressableStateCallbackType,
+  TextStyle,
 } from 'react-native';
 import React, {useCallback} from 'react';
 import PrimaryText from './PrimaryText';
@@ -18,7 +19,8 @@ interface ButtonProps extends PressableProps {
   title: string;
   disabled?: boolean;
   loading?: boolean;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'ghost';
+  textColor?: TextStyle['color'];
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -27,6 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   style,
   loading = false,
   variant = 'primary',
+  textColor,
   ...props
 }) => {
   const colors = useThemeColors();
@@ -41,6 +44,11 @@ const Button: React.FC<ButtonProps> = ({
           ...(variant === 'secondary' && {
             backgroundColor: colors.secondaryContainerColor,
             borderColor: colors.secondaryAccent,
+          }),
+          ...(variant === 'ghost' && {
+            backgroundColor: 'transparent',
+            width: 'auto',
+            height: 'auto',
           }),
         },
         // iOS behavior: opacity change
@@ -88,9 +96,10 @@ const Button: React.FC<ButtonProps> = ({
               styles.buttonText,
               {
                 color:
-                  variant === 'primary'
+                  textColor ||
+                  (variant === 'primary'
                     ? colors.buttonText
-                    : colors.primaryText,
+                    : colors.primaryText),
               },
             ]}>
             {title}
