@@ -6,15 +6,15 @@ import {
   selectDebtData,
   selectDebtError,
   selectDebtLoading,
-} from '../../redux/slice/debtDataSlice';
+} from '../../redux/slices/debtDataSlice';
 import {goBack, navigate} from '../../utils/navigationUtils';
 import {
   deleteAllDebtsbyDebtorId,
   deleteDebtById,
 } from '../../db/services/DebtService';
-import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';
+import {getAllDebtRequest} from '../../redux/slices/allDebtDataSlice';
 import {RouteProp} from '@react-navigation/native';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 import {deleteDebtorById} from '../../db/services/DebtorService';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
 import moment from 'moment';
@@ -23,7 +23,7 @@ import useAmountColor from '../../hooks/useAmountColor';
 import {
   getIndividualDebtorRequest,
   selectIndividualDebtorData,
-} from '../../redux/slice/IndividualDebtorSlice';
+} from '../../redux/slices/IndividualDebtorSlice';
 
 export type IndividualDebtsScreenRouteProp = RouteProp<
   {

@@ -1,6 +1,6 @@
 import useColorScheme from './useColorScheme';
 import {useSelector} from 'react-redux';
-import {selectThemePreference} from '../redux/slice/themePreferenceSlice';
+import {selectThemePreference} from '../redux/slices/themePreferenceSlice';
 import {useMemo} from 'react';
 
 export interface Colors {

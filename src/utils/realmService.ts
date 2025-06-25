@@ -8,7 +8,19 @@ import Debt from '../db/models/Debt';
 
 export const realmConfig: Realm.Configuration = {
   schema: [User, Category, Expense, Currency, Debtor, Debt],
-  schemaVersion: 0,
+  schemaVersion: 1,
+  onMigration: (oldRealm: Realm, newRealm: Realm) => {
+    if (oldRealm.schemaVersion < 0.1) {
+      const oldCategories = oldRealm.objects('Category');
+      const newCategories = newRealm.objects('Category');
+      for (let index = 0; index < oldCategories.length; index++) {
+        const oldCategory = oldCategories[index];
+        const newCategory = newCategories[index];
+
+        newCategory.archived = oldCategory.categoryStatus;
+      }
+    }
+  },
 };
 
 export const getRealm = () => {

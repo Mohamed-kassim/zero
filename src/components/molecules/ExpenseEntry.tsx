@@ -11,15 +11,15 @@ import PrimaryButton from '../atoms/PrimaryButton';
 import useThemeColors from '../../hooks/useThemeColors';
 import {goBack, navigate} from '../../utils/navigationUtils';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
-import {selectUserId} from '../../redux/slice/userIdSlice';
-import {selectActiveCategories} from '../../redux/slice/categoryDataSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
+import {selectActiveCategories} from '../../redux/slices/categoryDataSlice';
 import {FETCH_ALL_CATEGORY_DATA} from '../../redux/actionTypes';
 import {
   createExpense,
   updateExpenseById,
 } from '../../db/services/ExpenseService';
-import {getExpenseRequest} from '../../redux/slice/expenseDataSlice';
+import {getExpenseRequest} from '../../redux/slices/expenseDataSlice';
 import mainStyles from '../../styles/main';
 import DatePicker from '../atoms/DatePicker';
 import moment from 'moment';

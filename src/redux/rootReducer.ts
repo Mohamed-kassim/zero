@@ -1,18 +1,18 @@
 import {combineReducers} from 'redux';
-import userOnboardingReducer from './slice/isOnboardedSlice';
-import currencyDataReducer from './slice/currencyDataSlice';
-import themePreferenceReducer from './slice/themePreferenceSlice';
-import userNameReducer from './slice/userNameSlice';
-import userEmailReducer from './slice/userEmailSlice';
-import userIdReducer from './slice/userIdSlice';
-import categoryReducer from './slice/categoryDataSlice';
-import expenseReducer from './slice/expenseDataSlice';
-import debtorReducer from './slice/debtorDataSlice';
-import debtReducer from './slice/debtDataSlice';
-import allDebtReducer from './slice/allDebtDataSlice';
-import everydayExpenseReducer from './slice/everydayExpenseDataSlice';
-import allDataReducer from './slice/allDataSlice';
-import individualDebtorReducer from './slice/IndividualDebtorSlice';
+import userOnboardingReducer from './slices/isOnboardedSlice';
+import currencyDataReducer from './slices/currencyDataSlice';
+import themePreferenceReducer from './slices/themePreferenceSlice';
+import userNameReducer from './slices/userNameSlice';
+import userEmailReducer from './slices/userEmailSlice';
+import userReducer from './slices/userSlice';
+import categoryReducer from './slices/categoryDataSlice';
+import expenseReducer from './slices/expenseDataSlice';
+import debtorReducer from './slices/debtorDataSlice';
+import debtReducer from './slices/debtDataSlice';
+import allDebtReducer from './slices/allDebtDataSlice';
+import everydayExpenseReducer from './slices/everydayExpenseDataSlice';
+import allDataReducer from './slices/allDataSlice';
+import individualDebtorReducer from './slices/IndividualDebtorSlice';
 
 const rootReducer = combineReducers({
   userOnboarding: userOnboardingReducer,
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   themePreference: themePreferenceReducer,
   userName: userNameReducer,
   userEmail: userEmailReducer,
-  userId: userIdReducer,
+  user: userReducer,
   category: categoryReducer,
   expense: expenseReducer,
   debtor: debtorReducer,

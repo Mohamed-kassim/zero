@@ -5,13 +5,15 @@ import moment from 'moment';
 import {
   getExpenseRequest,
   selectExpenseData,
-} from '../../redux/slice/expenseDataSlice';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
+} from '../../redux/slices/expenseDataSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 
 const useReports = () => {
   const colors = useThemeColors();
   const dispatch = useDispatch();
-  const [selectedYear, setSelectedYear] = useState(Number(moment().format('YYYY')));
+  const [selectedYear, setSelectedYear] = useState(
+    Number(moment().format('YYYY')),
+  );
   const [selectedMonth, setSelectedMonth] = useState(moment().format('MMMM'));
   const [showYearPicker, setShowYearPicker] = useState(false);
   const [filteredTransactions, setFilteredTransactions] = useState([]);

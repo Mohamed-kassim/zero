@@ -23,9 +23,7 @@ export const selectCategoryData = (state: RootState) =>
 export const selectActiveCategories = createSelector(
   [selectCategoryData],
   categoryData =>
-    categoryData.filter(
-      (category: Category) => category.categoryStatus === true,
-    ),
+    categoryData.filter((category: Category) => category.archived === true),
 );
 
 export const {setCategoryData} = categoryDataSlice.actions;

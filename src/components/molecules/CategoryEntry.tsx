@@ -18,7 +18,7 @@ import {goBack} from '../../utils/navigationUtils';
 import allIcons from '../../../assets/jsons/categoryIcons.json';
 import allColors from '../../../assets/jsons/categoryColors.json';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectUserId} from '../../redux/slice/userIdSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
 import {
   createCategory,
   updateCategoryById,
@@ -29,7 +29,7 @@ import {categorySchema} from '../../utils/validationSchema';
 import onboardingStyles from '../../screens/OnboardingScreen/style';
 import Category from '../../db/models/Category';
 import defaultCategories from '../../../assets/jsons/defaultCategories.json';
-import {selectCategoryData} from '../../redux/slice/categoryDataSlice';
+import {selectCategoryData} from '../../redux/slices/categoryDataSlice';
 
 interface CategoryEntryProps {
   type: string;

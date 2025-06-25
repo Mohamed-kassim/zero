@@ -1,8 +1,8 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {getAllUsers} from '../../db/services/UserService';
-import {setUserId} from '../slice/userIdSlice';
-import {setUserName} from '../slice/userNameSlice';
-import {setUserEmail} from '../slice/userEmailSlice';
+import {setUserId} from '../slices/userSlice';
+import {setUserName} from '../slices/userNameSlice';
+import {setUserEmail} from '../slices/userEmailSlice';
 import {FETCH_ALL_USER_DATA} from '../actionTypes';
 
 function* fetchAllUserData(): Generator<any, void, any> {

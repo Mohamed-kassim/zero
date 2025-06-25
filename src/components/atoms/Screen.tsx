@@ -21,6 +21,7 @@ const getPadding = (edges: Edge[], insets: EdgeInsets) => {
     ...(edges?.includes('right') && {paddingRight: insets.right}),
   };
 };
+// TODO: add option to have keyboard scrollable screen
 
 const Screen: React.FC<ScreenProps> = ({children, style, edges}) => {
   const colors = useThemeColors();

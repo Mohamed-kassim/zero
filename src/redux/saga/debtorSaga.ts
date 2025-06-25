@@ -1,16 +1,16 @@
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {selectUserId} from '../slice/userIdSlice';
+import {selectUserId} from '../slices/userSlice';
 import {FETCH_ALL_DEBTOR_DATA} from '../actionTypes';
 import {
   getAllDebtorsByUserId,
   getDebtorByDebtorId,
 } from '../../db/services/DebtorService';
-import {setDebtorData} from '../slice/debtorDataSlice';
+import {setDebtorData} from '../slices/debtorDataSlice';
 import {
   getIndividualDebtorFaliure,
   getIndividualDebtorRequest,
   getIndividualDebtorSuccess,
-} from '../slice/IndividualDebtorSlice';
+} from '../slices/IndividualDebtorSlice';
 
 function* fetchAllDebtors(): Generator<any, void, any> {
   try {

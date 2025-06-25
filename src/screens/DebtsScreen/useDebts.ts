@@ -1,12 +1,12 @@
 import {useDispatch, useSelector} from 'react-redux';
 import useThemeColors from '../../hooks/useThemeColors';
-import {selectDebtorData} from '../../redux/slice/debtorDataSlice';
+import {selectDebtorData} from '../../redux/slices/debtorDataSlice';
 import {
   getAllDebtRequest,
   selectAllDebtData,
-} from '../../redux/slice/allDebtDataSlice';
+} from '../../redux/slices/allDebtDataSlice';
 import {useEffect, useState} from 'react';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
 import Debtor from '../../db/models/Debtor';
 import Debt from '../../db/models/Debt';

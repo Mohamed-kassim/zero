@@ -3,13 +3,13 @@ import React, {useState} from 'react';
 import Icon from '../atoms/Icons';
 import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectUserName, setUserName} from '../../redux/slice/userNameSlice';
+import {selectUserName, setUserName} from '../../redux/slices/userNameSlice';
 import {navigate} from '../../utils/navigationUtils';
 import PrimaryText from '../atoms/PrimaryText';
 import useSettings from '../../screens/SettingsScreen/useSettings';
 import ChangeNameModal from './ChangeNameModal';
 import {updateUserById} from '../../db/services/UserService';
-import {selectUserId} from '../../redux/slice/userIdSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
 
 interface HeaderContainerProps {
   headerText: string;

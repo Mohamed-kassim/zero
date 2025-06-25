@@ -4,8 +4,14 @@ import {objectIdSchema} from '../utils';
 
 export const userSchema = z.object({
   _id: objectIdSchema,
-  username: z.string(),
-  email: z.string(),
+  username: z
+    .string()
+    .min(3, 'Username must be at least 3 characters long.')
+    .max(50, 'Username cannot exceed 50 characters.')
+    .refine(value => /^[A-Za-z\s]+$/.test(value), {
+      message: 'Username can only contain letters and spaces.',
+    }),
+  email: z.string().email('Invalid email address.'),
 });
 
 export const createUserSchema = userSchema.omit({_id: true});

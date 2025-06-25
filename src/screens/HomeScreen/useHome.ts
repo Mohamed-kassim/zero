@@ -6,10 +6,10 @@ import {
   selectExpenseData,
   selectExpenseError,
   selectExpenseLoading,
-} from '../../redux/slice/expenseDataSlice';
-import {selectUserName} from '../../redux/slice/userNameSlice';
-import {selectUserId} from '../../redux/slice/userIdSlice';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
+} from '../../redux/slices/expenseDataSlice';
+import {selectUserName} from '../../redux/slices/userNameSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 import {
   FETCH_ALL_CATEGORY_DATA,
   FETCH_ALL_USER_DATA,

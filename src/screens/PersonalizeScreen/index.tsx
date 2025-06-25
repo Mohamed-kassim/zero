@@ -9,27 +9,31 @@ import Button from '../../components/atoms/Button';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import ControlledInput from '../../components/atoms/ControlledInput';
-import {
-  PersonalizationFormSchema,
-  personalizationFormSchema,
-} from '../../utils/validationSchema';
+import {CreateUserSchema, createUserSchema} from '../../db/models/User';
 
 import {navigate} from '../../utils/navigationUtils';
 import useThemeColors from '../../hooks/useThemeColors';
 import {createUser} from '../../db/services/user';
+import {useDispatch} from 'react-redux';
+import {setUser} from '../../redux/slices/userSlice';
 
 const PersonalizeScreen = () => {
   const colors = useThemeColors();
   const [isLoading, setIsLoading] = useState(false);
-  const {control, handleSubmit} = useForm<PersonalizationFormSchema>({
-    resolver: zodResolver(personalizationFormSchema),
+  const dispatch = useDispatch();
+  const {control, handleSubmit} = useForm<CreateUserSchema>({
+    resolver: zodResolver(createUserSchema),
   });
-  const email = 'null';
+
   // TODO: user can go back to the previous screen and recreate the user with the same data
-  const onSubmit = async (data: PersonalizationFormSchema) => {
+  const onSubmit = async (data: CreateUserSchema) => {
     try {
       setIsLoading(true);
-      await createUser({username: data.name, email});
+      const user = await createUser({
+        username: data.username,
+        email: data.email,
+      });
+      dispatch(setUser(user));
       navigate('OnboardingScreen');
     } catch (error) {
       console.error('Error saving user data to Realm:', error);
@@ -73,18 +77,36 @@ const PersonalizeScreen = () => {
           </PrimaryText>
         </View>
         <ControlledInput
-          name="name"
+          name="username"
           control={control}
           label={'Name'}
-          placeholder={'eg. Indranil Bhuin'}
+          placeholder={'eg. Mohamed Kassim'}
           accessibilityLabel="Enter your name"
           accessibilityHint="Enter the name that your friends call you"
           accessibilityRole="text"
           autoCapitalize="words"
           autoComplete="username"
           autoCorrect={false}
-          returnKeyType="done"
+          returnKeyType="next"
           textContentType="username"
+          enablesReturnKeyAutomatically
+          editable={!isLoading}
+          onSubmitEditing={handleSubmit(onSubmit)}
+        />
+        <ControlledInput
+          name="email"
+          control={control}
+          label={'Email'}
+          placeholder={'eg. Kassim@gmail.com'}
+          accessibilityLabel="Enter your email"
+          accessibilityHint="Enter the email that you want to use to login"
+          accessibilityRole="text"
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          returnKeyType="done"
+          textContentType="emailAddress"
+          keyboardType="email-address"
           enablesReturnKeyAutomatically
           editable={!isLoading}
           onSubmitEditing={handleSubmit(onSubmit)}

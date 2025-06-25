@@ -1,5 +1,5 @@
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {selectUserId} from '../slice/userIdSlice';
+import {selectUserId} from '../slices/userSlice';
 import {
   getAllExpensesByDate,
   getAllExpensesByUserId,
@@ -8,12 +8,12 @@ import {
   getExpenseFaliure,
   getExpenseRequest,
   getExpenseSuccess,
-} from '../slice/expenseDataSlice';
+} from '../slices/expenseDataSlice';
 import {
   getEverydayExpenseFaliure,
   getEverydayExpenseRequest,
   getEverydayExpenseSuccess,
-} from '../slice/everydayExpenseDataSlice';
+} from '../slices/everydayExpenseDataSlice';
 
 function* fetchAllExpenses(): Generator<any, void, any> {
   try {

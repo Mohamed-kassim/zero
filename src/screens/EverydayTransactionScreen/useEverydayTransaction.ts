@@ -1,14 +1,14 @@
 import moment from 'moment';
 import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 import {RouteProp} from '@react-navigation/native';
 import Expense from '../../db/models/Expense';
 import {useEffect} from 'react';
 import {
   getEverydayExpenseRequest,
   selectEverydayExpenseData,
-} from '../../redux/slice/everydayExpenseDataSlice';
+} from '../../redux/slices/everydayExpenseDataSlice';
 
 export type EverydayTransactionRouteProp = RouteProp<
   {

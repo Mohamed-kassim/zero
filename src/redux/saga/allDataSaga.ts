@@ -4,7 +4,7 @@ import {
   getAllDataFaliure,
   getAllDataRequest,
   getAllDataSuccess,
-} from '../slice/allDataSlice';
+} from '../slices/allDataSlice';
 
 function* fetchAllData(): Generator<any, void, any> {
   try {

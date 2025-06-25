@@ -1,89 +1,156 @@
-import {TouchableOpacity, View} from 'react-native';
-import React from 'react';
-import PrimaryButton from '../../components/atoms/PrimaryButton';
+import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
+import React, {useState} from 'react';
 import styles from './style';
 import defaultCategories from '../../../assets/jsons/defaultCategories.json';
 import useOnboarding from './useOnboarding';
-import PrimaryView from '../../components/atoms/PrimaryView';
+
 import PrimaryText from '../../components/atoms/PrimaryText';
 import Icon from '../../components/atoms/Icons';
+import Button from '../../components/atoms/Button';
+import {navigate} from '../../utils/navigationUtils';
+import personalizeStyles from '../PersonalizeScreen/style';
+import Screen from '../../components/atoms/Screen';
+import Category from '../../db/models/Category';
+import useThemeColors from '../../hooks/useThemeColors';
+import onboardingStyles from './style';
+import {selectUser} from '../../redux/slices/userSlice';
+import {useSelector} from 'react-redux';
+
+import {createBulkCategories} from '../../db/services/category';
+
+type CategoryData = Pick<Category, 'name' | 'icon' | 'color'> & {
+  _id: string | Realm.BSON.ObjectId;
+};
+interface CategoryTileProps extends TouchableOpacityProps {
+  category: CategoryData;
+  active: boolean;
+}
+const CategoryTile = (props: CategoryTileProps) => {
+  const colors = useThemeColors();
+  const {category, active, ...rest} = props;
+  return (
+    <TouchableOpacity key={String(category._id)} {...rest}>
+      <View
+        style={[
+          styles.categoryContainer,
+          {
+            backgroundColor: active
+              ? `${colors.accentGreen}75`
+              : colors.secondaryAccent,
+            borderColor: colors.secondaryContainerColor,
+          },
+        ]}>
+        {category.icon !== undefined ? (
+          <View style={styles.iconContainer}>
+            <Icon
+              name={category.icon ?? ''}
+              size={20}
+              color={category.color ?? ''}
+              type="MaterialCommunityIcons"
+            />
+          </View>
+        ) : null}
+
+        <PrimaryText
+          style={[
+            onboardingStyles.categoryText,
+            {
+              color: active ? colors.buttonText : colors.primaryText,
+            },
+          ]}>
+          {category.name}
+        </PrimaryText>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const getIsSelected = (
+  category: CategoryData,
+  selectedCategories: CategoryData[],
+) => {
+  return selectedCategories.some(item => item._id === category._id);
+};
 
 const OnboardingScreen = () => {
-  const {
-    colors,
-    selectedCategories,
-    handleSkip,
-    handleSubmit,
-    toggleCategorySelection,
-  } = useOnboarding();
+  const colors = useThemeColors();
+  const user = useSelector(selectUser);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<CategoryData[]>(
+    [],
+  );
 
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      await createBulkCategories(
+        selectedCategories.map(category => ({
+          name: category.name,
+          color: category.color,
+          userId: user?._id,
+          icon: category.icon,
+        })),
+      );
+
+      navigate('ChooseCurrencyScreen');
+    } catch (error) {
+      console.log('error in createBulkCategories', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const toggleCategorySelection = (category: CategoryData) => {
+    if (getIsSelected(category, selectedCategories)) {
+      setSelectedCategories(prev =>
+        prev.filter(item => item._id !== category._id),
+      );
+    } else {
+      setSelectedCategories(prev => [...prev, category]);
+    }
+  };
+  const onSkip = async () => {
+    navigate('ChooseCurrencyScreen');
+  };
   return (
-    <PrimaryView style={{justifyContent: 'space-between'}}>
-      <View>
-        <TouchableOpacity
-          style={styles.skipButtonContainer}
-          onPress={handleSkip}>
-          <PrimaryText style={{color: colors.accentGreen, fontSize: 12}}>
-            skip
-          </PrimaryText>
-        </TouchableOpacity>
+    <Screen style={personalizeStyles.container} edges={['top', 'bottom']}>
+      <View style={personalizeStyles.contentContainer}>
+        <Button
+          style={personalizeStyles.skipButtonContainer}
+          variant="ghost"
+          title="skip"
+          textColor={colors.accentGreen}
+          onPress={onSkip}
+        />
 
-        <View style={styles.titleTextContainer}>
-          <PrimaryText style={{fontSize: 24}}>
-            Default categories are
-          </PrimaryText>
-          <PrimaryText style={{fontSize: 24}}>here</PrimaryText>
-        </View>
+        <PrimaryText style={personalizeStyles.titleText}>
+          Default categories are{'\n'}here
+        </PrimaryText>
 
-        <View style={styles.subtitleTextContainer}>
-          <PrimaryText style={{color: colors.accentGreen, fontSize: 15}}>
-            Select your categories you want track
-          </PrimaryText>
-        </View>
+        <PrimaryText style={personalizeStyles.subtitleText}>
+          Select your categories you want track
+        </PrimaryText>
+
         <View style={styles.categoryMainContainer}>
-          {defaultCategories?.map((category: any) => (
-            <TouchableOpacity
+          {defaultCategories?.map(category => (
+            <CategoryTile
               key={String(category._id)}
-              onPress={() => toggleCategorySelection(category)}>
-              <View
-                style={[
-                  styles.categoryContainer,
-                  {
-                    backgroundColor: selectedCategories?.includes(category)
-                      ? `${colors.accentGreen}75`
-                      : colors.secondaryAccent,
-                    borderColor: colors.secondaryContainerColor,
-                  },
-                ]}>
-                {category.icon !== undefined ? (
-                  <View style={styles.iconContainer}>
-                    <Icon
-                      name={category.icon}
-                      size={20}
-                      color={category.color}
-                      type="MaterialCommunityIcons"
-                    />
-                  </View>
-                ) : null}
-
-                <PrimaryText
-                  style={{
-                    color: selectedCategories?.includes(category)
-                      ? colors.buttonText
-                      : colors.primaryText,
-                    fontSize: 13,
-                  }}>
-                  {category.name}
-                </PrimaryText>
-              </View>
-            </TouchableOpacity>
+              category={category}
+              active={getIsSelected(category, selectedCategories)}
+              onPress={() => toggleCategorySelection(category)}
+            />
           ))}
         </View>
       </View>
-      <View style={{marginBottom: '10%'}}>
-        <PrimaryButton onPress={handleSubmit} buttonTitle={'Continue'} />
+      <View style={personalizeStyles.buttonContainer}>
+        <Button
+          variant="primary"
+          onPress={handleSubmit}
+          title={'Continue'}
+          loading={isLoading}
+        />
       </View>
-    </PrimaryView>
+    </Screen>
   );
 };
 

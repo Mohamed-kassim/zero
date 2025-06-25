@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const personalizeStyles = StyleSheet.create({
+export const personalizeStyles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
   },

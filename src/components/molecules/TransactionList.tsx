@@ -8,11 +8,11 @@ import {navigate} from '../../utils/navigationUtils';
 import Category from '../../db/models/Category';
 import {deleteExpenseById} from '../../db/services/ExpenseService';
 import {useDispatch} from 'react-redux';
-import {getExpenseRequest} from '../../redux/slice/expenseDataSlice';
+import {getExpenseRequest} from '../../redux/slices/expenseDataSlice';
 import Expense from '../../db/models/Expense';
 import {Dispatch} from 'redux';
 import PrimaryText from '../atoms/PrimaryText';
-import {getEverydayExpenseRequest} from '../../redux/slice/everydayExpenseDataSlice';
+import {getEverydayExpenseRequest} from '../../redux/slices/everydayExpenseDataSlice';
 import UndoModal from '../atoms/UndoModal';
 import {formatCurrency} from '../../utils/numberUtils';
 

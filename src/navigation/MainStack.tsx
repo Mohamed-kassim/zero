@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import React from 'react';
-import {selectIsOnboarded} from '../redux/slice/isOnboardedSlice';
+import {selectIsOnboarded} from '../redux/slices/isOnboardedSlice';
 import HomeStack from './HomeStack';
 import OnboardingStack from './OnboardingStack';
 

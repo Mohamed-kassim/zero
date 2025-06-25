@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from 'react-redux';
 import useThemeColors from '../../hooks/useThemeColors';
-import {selectUserName} from '../../redux/slice/userNameSlice';
-import {selectUserId} from '../../redux/slice/userIdSlice';
-import {selectCategoryData} from '../../redux/slice/categoryDataSlice';
+import {selectUserName} from '../../redux/slices/userNameSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
+import {selectCategoryData} from '../../redux/slices/categoryDataSlice';
 import {useEffect, useState} from 'react';
-import {selectDebtorData} from '../../redux/slice/debtorDataSlice';
+import {selectDebtorData} from '../../redux/slices/debtorDataSlice';
 import {Linking, Platform} from 'react-native';
 import {requestStoragePermission} from '../../utils/dataUtils';
 import DocumentPicker from 'react-native-document-picker';
@@ -22,10 +22,10 @@ import {createDebtor} from '../../db/services/DebtorService';
 import {createCurrency} from '../../db/services/CurrencyService';
 import {createExpense} from '../../db/services/ExpenseService';
 import {createDebt} from '../../db/services/DebtService';
-import {getExpenseRequest} from '../../redux/slice/expenseDataSlice';
-import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';
+import {getExpenseRequest} from '../../redux/slices/expenseDataSlice';
+import {getAllDebtRequest} from '../../redux/slices/allDebtDataSlice';
 
-import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
+import {setIsOnboarded} from '../../redux/slices/isOnboardedSlice';
 import Storage from '../../utils/storage';
 
 const useExistingUser = () => {

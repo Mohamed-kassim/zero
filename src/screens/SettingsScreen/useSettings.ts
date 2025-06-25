@@ -1,17 +1,17 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {selectUserName, setUserName} from '../../redux/slice/userNameSlice';
-import {selectUserId} from '../../redux/slice/userIdSlice';
+import {selectUserName, setUserName} from '../../redux/slices/userNameSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
 import {
   selectCurrencyCode,
   selectCurrencyId,
   selectCurrencyName,
   selectCurrencySymbol,
   setCurrencyData,
-} from '../../redux/slice/currencyDataSlice';
+} from '../../redux/slices/currencyDataSlice';
 import {
   selectThemePreference,
   setThemePreference,
-} from '../../redux/slice/themePreferenceSlice';
+} from '../../redux/slices/themePreferenceSlice';
 import {useEffect, useState} from 'react';
 import currencies from '../../../assets/jsons/currencies.json';
 import {getAppVersion} from '../../utils/getVersion';
@@ -20,9 +20,12 @@ import Storage from '../../utils/storage';
 import {updateUserById} from '../../db/services/UserService';
 import {updateCurrencyById} from '../../db/services/CurrencyService';
 import {Linking} from 'react-native';
-import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
+import {setIsOnboarded} from '../../redux/slices/isOnboardedSlice';
 import {deleteAllData} from '../../db/services/DeleteService';
-import {getAllDataRequest, selectAllData} from '../../redux/slice/allDataSlice';
+import {
+  getAllDataRequest,
+  selectAllData,
+} from '../../redux/slices/allDataSlice';
 
 const useSettings = () => {
   const userName = useSelector(selectUserName);

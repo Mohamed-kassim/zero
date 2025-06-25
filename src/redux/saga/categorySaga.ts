@@ -1,8 +1,8 @@
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {selectUserId} from '../slice/userIdSlice';
+import {selectUserId} from '../slices/userSlice';
 import {FETCH_ALL_CATEGORY_DATA} from '../actionTypes';
 import {getAllCategoriesByUserId} from '../../db/services/CategoryService';
-import {setCategoryData} from '../slice/categoryDataSlice';
+import {setCategoryData} from '../slices/categoryDataSlice';
 
 function* fetchAllCategories(): Generator<any, void, any> {
   try {

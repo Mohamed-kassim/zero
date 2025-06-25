@@ -11,12 +11,12 @@ import CustomInput from '../atoms/CustomInput';
 import PrimaryButton from '../atoms/PrimaryButton';
 import {useDispatch, useSelector} from 'react-redux';
 import Category from '../../db/models/Category';
-import {selectUserId} from '../../redux/slice/userIdSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
 import {createDebtor, updateDebtorById} from '../../db/services/DebtorService';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
 import debtCategories from '../../../assets/jsons/defaultDebtAccounts.json';
 import {nameSchema} from '../../utils/validationSchema';
-import {getDebtRequest} from '../../redux/slice/debtDataSlice';
+import {getDebtRequest} from '../../redux/slices/debtDataSlice';
 
 interface DebtorEntryProps {
   type: string;

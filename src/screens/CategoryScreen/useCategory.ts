@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import useThemeColors from '../../hooks/useThemeColors';
-import {selectActiveCategories} from '../../redux/slice/categoryDataSlice';
+import {selectActiveCategories} from '../../redux/slices/categoryDataSlice';
 import {useEffect, useState} from 'react';
 import {FETCH_ALL_CATEGORY_DATA} from '../../redux/actionTypes';
 import {navigate} from '../../utils/navigationUtils';

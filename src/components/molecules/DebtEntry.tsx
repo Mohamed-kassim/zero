@@ -8,9 +8,9 @@ import {goBack} from '../../utils/navigationUtils';
 import useThemeColors from '../../hooks/useThemeColors';
 import {createDebt, updateDebtById} from '../../db/services/DebtService';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectUserId} from '../../redux/slice/userIdSlice';
-import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';
-import {getDebtRequest} from '../../redux/slice/debtDataSlice';
+import {selectUserId} from '../../redux/slices/userIdSlice';
+import {getAllDebtRequest} from '../../redux/slices/allDebtDataSlice';
+import {getDebtRequest} from '../../redux/slices/debtDataSlice';
 import mainStyles from '../../styles/main';
 import DatePicker from '../atoms/DatePicker';
 import {DebtsScreenProp} from '../../screens/AddDebtsScreen';
@@ -18,7 +18,7 @@ import moment from 'moment';
 import {expenseAmountSchema, expenseSchema} from '../../utils/validationSchema';
 import textInputStyles from '../../styles/textInput';
 import PrimaryText from '../atoms/PrimaryText';
-import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
+import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 import debtsStyles from '../../screens/DebtsScreen/style';
 
 interface DebtEntryProps {

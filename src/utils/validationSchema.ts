@@ -1,20 +1,5 @@
 import {z} from 'zod';
 
-export const personalizationFormSchema = z.object({
-  name: z
-    .string()
-
-    .min(3, 'Name must be at least 3 characters long.')
-    .max(50, 'Name cannot exceed 50 characters.')
-    .refine(value => /^[A-Za-z\s]+$/.test(value), {
-      message: 'Name can only contain letters and spaces.',
-    }),
-});
-
-export type PersonalizationFormSchema = z.infer<
-  typeof personalizationFormSchema
->;
-
 export const expenseSchema = z
   .string()
   .min(1, 'Expense must be at least 1 character long.')

@@ -1,5 +1,5 @@
 import {getRealm} from '../../utils/realmService';
-
+import Realm from 'realm';
 export const createCategory = async (
   name: string,
   userId: Realm.BSON.ObjectId,
@@ -15,7 +15,7 @@ export const createCategory = async (
         realm.create('Category', {
           _id: new Realm.BSON.ObjectId(),
           name: name,
-          categoryStatus: true,
+          archived: true,
           user: user,
           icon: icon,
           color: color,
@@ -37,8 +37,8 @@ export const softDeleteCategoryById = async (
     realm.write(() => {
       const category = realm.objectForPrimaryKey('Category', categoryId);
       if (category) {
-        if (category.categoryStatus) {
-          category.categoryStatus = false;
+        if (category.archived) {
+          category.archived = false;
         }
       } else {
         console.error('Category not found.');

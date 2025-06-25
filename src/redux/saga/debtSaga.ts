@@ -1,10 +1,10 @@
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {selectUserId} from '../slice/userIdSlice';
+import {selectUserId} from '../slices/userSlice';
 import {
   getDebtFaliure,
   getDebtRequest,
   getDebtSuccess,
-} from '../slice/debtDataSlice';
+} from '../slices/debtDataSlice';
 import {
   getAllDebtsByUserId,
   getAllDebtsByUserIdAndDebtorId,
@@ -13,7 +13,7 @@ import {
   getAllDebtFaliure,
   getAllDebtRequest,
   getAllDebtSuccess,
-} from '../slice/allDebtDataSlice';
+} from '../slices/allDebtDataSlice';
 
 function* fetchAllDebtsbyDebtor(action: any): Generator<any, void, any> {
   try {

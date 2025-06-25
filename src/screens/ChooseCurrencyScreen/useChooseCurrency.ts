@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectUserId} from '../../redux/slice/userIdSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
 import {createCurrency} from '../../db/services/CurrencyService';
 
-import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
+import {setIsOnboarded} from '../../redux/slices/isOnboardedSlice';
 import currencies from '../../../assets/jsons/currencies.json';
 import Currency from '../../db/models/Currency';
 import Storage from '../../utils/storage';

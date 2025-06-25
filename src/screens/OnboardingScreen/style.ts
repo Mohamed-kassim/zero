@@ -1,26 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 const onboardingStyles = StyleSheet.create({
-  titleTextContainer: {
-    paddingTop: '15%',
-  },
-  subtitleTextContainer: {
-    paddingTop: '10%',
-    paddingBottom: '5%',
-  },
-  textInput: {
-    height: 60,
-    borderWidth: 2,
-    marginBottom: 15,
-    borderRadius: 15,
-    padding: 20,
-    fontFamily: 'FiraCode-Medium',
-    includeFontPadding: false,
-  },
-  textInputContainer: {},
-  skipButtonContainer: {
-    alignSelf: 'flex-end',
-    paddingTop: '5%',
+  categoryText: {
+    fontSize: 13,
   },
   categoryContainer: {
     height: 45,

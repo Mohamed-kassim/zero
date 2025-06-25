@@ -8,7 +8,7 @@ export const setNavigationRef = (ref: NavigationContainerRef<any>) => {
 
 export const navigate = (name: string, params?: object) => {
   if (navigationRef) {
-    navigationRef.dispatch(CommonActions.navigate({name, params}));
+    navigationRef.dispatch(CommonActions.navigate(name, params));
   } else {
     console.error(
       'Navigation reference is not set. Make sure to call setNavigationRef.',
