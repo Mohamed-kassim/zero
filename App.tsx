@@ -8,27 +8,30 @@ import {LogBox} from 'react-native';
 import {bootTimeMeasurement} from './src/utils/bootTimeMeasurement';
 import {PersistGate} from 'redux-persist/integration/react';
 import CustomLoader from './src/components/atoms/CustomLoader';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   LogBox.ignoreAllLogs();
 
   return (
-    <Provider store={store}>
-      <PersistGate
-        loading={<CustomLoader />}
-        persistor={persistor}
-        onBeforeLift={() => {
-          bootTimeMeasurement.markReduxInitialized();
-        }}>
-        <NavigationContainer
-          ref={setNavigationRef}
-          onReady={() => {
-            bootTimeMeasurement.markNavigationInitialized();
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <PersistGate
+          loading={<CustomLoader />}
+          persistor={persistor}
+          onBeforeLift={() => {
+            bootTimeMeasurement.markReduxInitialized();
           }}>
-          <MainStack />
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
+          <NavigationContainer
+            ref={setNavigationRef}
+            onReady={() => {
+              bootTimeMeasurement.markNavigationInitialized();
+            }}>
+            <MainStack />
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
+    </SafeAreaProvider>
   );
 };
 
