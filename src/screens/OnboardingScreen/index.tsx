@@ -2,7 +2,6 @@ import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from './style';
 import defaultCategories from '../../../assets/jsons/defaultCategories.json';
-import useOnboarding from './useOnboarding';
 
 import PrimaryText from '../../components/atoms/PrimaryText';
 import Icon from '../../components/atoms/Icons';
@@ -13,8 +12,7 @@ import Screen from '../../components/atoms/Screen';
 import Category from '../../db/models/Category';
 import useThemeColors from '../../hooks/useThemeColors';
 import onboardingStyles from './style';
-import {selectUser} from '../../redux/slices/userSlice';
-import {useSelector} from 'react-redux';
+import {useUser} from '../../redux/slices/userSlice';
 
 import {createBulkCategories} from '../../db/services/category';
 
@@ -74,7 +72,7 @@ const getIsSelected = (
 
 const OnboardingScreen = () => {
   const colors = useThemeColors();
-  const user = useSelector(selectUser);
+  const user = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<CategoryData[]>(
     [],
@@ -127,7 +125,8 @@ const OnboardingScreen = () => {
           Default categories are{'\n'}here
         </PrimaryText>
 
-        <PrimaryText style={personalizeStyles.subtitleText}>
+        <PrimaryText
+          style={[personalizeStyles.subtitleText, {color: colors.accentGreen}]}>
           Select your categories you want track
         </PrimaryText>
 

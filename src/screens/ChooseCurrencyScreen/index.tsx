@@ -1,84 +1,99 @@
-import {ScrollView, TextInput, View} from 'react-native';
-import React from 'react';
-import styles from './style';
+import {ScrollView, View} from 'react-native';
+import React, {useState} from 'react';
+
 import Icon from '../../components/atoms/Icons';
-import PrimaryButton from '../../components/atoms/PrimaryButton';
-import useChooseCurrency from './useChooseCurrency';
-import PrimaryView from '../../components/atoms/PrimaryView';
+
 import PrimaryText from '../../components/atoms/PrimaryText';
-import textInputStyles from '../../styles/textInput';
+
 import CurrencySymbolPicker from '../../components/molecules/CurrencySymbolPicker';
+import logger from '../../utils/logger';
+import personalizeStyles from '../PersonalizeScreen/style';
+import Screen from '../../components/atoms/Screen';
+import Button from '../../components/atoms/Button';
+import Input from '../../components/atoms/Input';
+import currencies from '../../../assets/jsons/currencies.json';
+import useThemeColors from '../../hooks/useThemeColors';
+import {useSetIsOnboarded} from '../../redux/slices/isOnboardedSlice';
+import {createCurrency} from '../../db/services/CurrencyService';
 
+import {useUserId} from '../../redux/slices/userSlice';
+
+const filterCurrencies = (search: string) => {
+  return currencies.filter(currency => {
+    return (
+      currency.name.toLowerCase().includes(search.toLowerCase()) ||
+      currency.code.toLowerCase().includes(search.toLowerCase()) ||
+      currency.symbol.toLowerCase().includes(search.toLowerCase()) ||
+      currency.symbolNative.toLowerCase().includes(search.toLowerCase())
+    );
+  });
+};
 const ChooseCurrencyScreen = () => {
-  const {
-    colors,
-    search,
-    filteredCurrencies,
-    selectedCurrency,
-    handleCurrencySubmit,
-    handleSearch,
-    handleCurrencySelect,
-  } = useChooseCurrency();
+  logger.rerender('ChooseCurrencyScreen');
+  const colors = useThemeColors();
+  const [selectedCurrency, setSelectedCurrency] = useState<any>(null);
 
+  const userId = useUserId();
+  const [search, setSearch] = useState('');
+  const filteredCurrencies = filterCurrencies(search);
+
+  const handleCurrencySelect = (currency: any) => {
+    setSelectedCurrency(currency);
+  };
+
+  const setIsOnboarded = useSetIsOnboarded();
+
+  const handleCurrencySubmit = async () => {
+    if (selectedCurrency) {
+      console.log('second');
+      await createCurrency(
+        selectedCurrency.code,
+        selectedCurrency.symbol,
+        selectedCurrency.name,
+        Realm.BSON.ObjectID.createFromHexString(userId),
+      );
+
+      setIsOnboarded(true);
+    }
+  };
   return (
-    <PrimaryView>
-      <View style={styles.titleTextContainer}>
-        <PrimaryText style={{fontSize: 24}}>Your money,</PrimaryText>
-        <PrimaryText style={{fontSize: 24}}>your currency.</PrimaryText>
-        <PrimaryText style={{fontSize: 24}}>
-          Pick the one you prefer
+    <Screen style={personalizeStyles.container} edges={['top', 'bottom']}>
+      <View style={personalizeStyles.contentContainer}>
+        <PrimaryText style={personalizeStyles.titleText}>
+          Your money,{'\n'}your currency.{'\n'}Pick the one you prefer.
         </PrimaryText>
-      </View>
 
-      <View style={styles.subtitleTextContainer}>
-        <PrimaryText style={{color: colors.accentGreen, fontSize: 15}}>
+        <PrimaryText
+          style={[personalizeStyles.subtitleText, {color: colors.accentGreen}]}>
           Select your currency
         </PrimaryText>
-      </View>
-
-      <View
-        style={[
-          textInputStyles.textInputContainer,
-          {
-            borderColor: colors.secondaryContainerColor,
-            backgroundColor: colors.secondaryAccent,
-          },
-        ]}>
-        <Icon
-          name="search"
-          size={20}
-          color={colors.primaryText}
-          type="Feather"
-        />
-        <TextInput
-          style={[
-            textInputStyles.textInputWithIcon,
-            {
-              color: colors.primaryText,
-            },
-          ]}
+        <Input
+          label="Search"
           value={search}
-          onChangeText={handleSearch}
+          onChangeText={setSearch}
           placeholder={'eg. INR'}
-          placeholderTextColor={colors.secondaryText}
+          leftAccessory={
+            <Icon
+              name="search"
+              size={20}
+              color={colors.primaryText}
+              type="Feather"
+            />
+          }
         />
-      </View>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <CurrencySymbolPicker
-          filteredCurrencies={filteredCurrencies}
-          selectedCurrency={selectedCurrency}
-          handleCurrencySelect={handleCurrencySelect}
-        />
-      </ScrollView>
-
-      <View style={{marginBottom: 20}}>
-        <PrimaryButton
-          onPress={handleCurrencySubmit}
-          buttonTitle={'Continue'}
-        />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <CurrencySymbolPicker
+            filteredCurrencies={filteredCurrencies}
+            selectedCurrency={selectedCurrency}
+            handleCurrencySelect={handleCurrencySelect}
+          />
+        </ScrollView>
       </View>
-    </PrimaryView>
+      <View style={personalizeStyles.buttonContainer}>
+        <Button onPress={handleCurrencySubmit} title={'Continue'} />
+      </View>
+    </Screen>
   );
 };
 
