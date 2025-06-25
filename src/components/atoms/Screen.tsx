@@ -15,10 +15,10 @@ interface ScreenProps {
 
 const getPadding = (edges: Edge[], insets: EdgeInsets) => {
   return {
-    paddingTop: edges?.includes('top') ? insets.top : 0,
-    paddingBottom: edges?.includes('bottom') ? insets.bottom : 0,
-    paddingLeft: edges?.includes('left') ? insets.left : 0,
-    paddingRight: edges?.includes('right') ? insets.right : 0,
+    ...(edges?.includes('top') && {paddingTop: insets.top}),
+    ...(edges?.includes('bottom') && {paddingBottom: insets.bottom}),
+    ...(edges?.includes('left') && {paddingLeft: insets.left}),
+    ...(edges?.includes('right') && {paddingRight: insets.right}),
   };
 };
 
