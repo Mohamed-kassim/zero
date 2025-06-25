@@ -1,11 +1,11 @@
-import {ScrollView, View} from 'react-native';
+import {View} from 'react-native';
 import React, {useState} from 'react';
 
 import Icon from '../../components/atoms/Icons';
 
 import PrimaryText from '../../components/atoms/PrimaryText';
 
-import CurrencySymbolPicker from '../../components/molecules/CurrencySymbolPicker';
+import CurrenciesPicker from '../../components/molecules/CurrencySymbolPicker';
 import logger from '../../utils/logger';
 import personalizeStyles from '../PersonalizeScreen/style';
 import Screen from '../../components/atoms/Screen';
@@ -81,14 +81,11 @@ const ChooseCurrencyScreen = () => {
             />
           }
         />
-
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <CurrencySymbolPicker
-            filteredCurrencies={filteredCurrencies}
-            selectedCurrency={selectedCurrency}
-            handleCurrencySelect={handleCurrencySelect}
-          />
-        </ScrollView>
+        <CurrenciesPicker
+          currencies={filteredCurrencies}
+          selectedCurrency={selectedCurrency}
+          handleCurrencySelect={handleCurrencySelect}
+        />
       </View>
       <View style={personalizeStyles.buttonContainer}>
         <Button onPress={handleCurrencySubmit} title={'Continue'} />
