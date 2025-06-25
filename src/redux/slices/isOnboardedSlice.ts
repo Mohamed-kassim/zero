@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../rootReducer';
+import {useDispatch} from 'react-redux';
 
 const initialState = {
   isOnboarded: false,
@@ -21,4 +22,10 @@ export const selectIsOnboarded = (state: RootState) =>
 
 export const {setIsOnboarded} = isOnboardedSlice.actions;
 
+export const useSetIsOnboarded = () => {
+  const dispatch = useDispatch();
+  return (isOnboarded: boolean) => {
+    dispatch(setIsOnboarded(isOnboarded));
+  };
+};
 export default isOnboardedSlice.reducer;
