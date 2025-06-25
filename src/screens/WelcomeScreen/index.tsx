@@ -1,25 +1,31 @@
 import {Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import PrimaryView from '../../components/atoms/PrimaryView';
 import PrimaryText from '../../components/atoms/PrimaryText';
-import PrimaryButton from '../../components/atoms/PrimaryButton';
+
 import Carousel from '../../components/atoms/Carousel';
 import {styles} from './styles';
 import useThemeColors from '../../hooks/useThemeColors';
 import {deleteAllData} from '../../services/DeleteService';
 import {navigate} from '../../utils/navigationUtils';
 import Button from '../../components/atoms/Button';
+import OnboardingCarousel from '../../components/molecules/OnboardingCarousel';
 
 const WelcomeScreen = () => {
   const colors = useThemeColors();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleExistingUser = async () => {
+    setIsLoading(true);
     await deleteAllData();
+    setIsLoading(false);
     navigate('ExistingUserScreen');
   };
 
   const handleNewUser = async () => {
+    setIsLoading(true);
     await deleteAllData();
+    setIsLoading(false);
     navigate('PersonalizeScreen');
   };
 
@@ -31,21 +37,21 @@ const WelcomeScreen = () => {
         </PrimaryText>
       </View>
 
-      <Carousel />
+      <OnboardingCarousel />
 
       <View style={styles.buttonContainer}>
         <Button
           variant="primary"
           onPress={handleExistingUser}
           title={'Existing User'}
-          disabled={undefined}
+          loading={isLoading}
         />
         <PrimaryText style={styles.orText}>or</PrimaryText>
         <Button
           variant="secondary"
           onPress={handleNewUser}
           title={'New User'}
-          disabled={undefined}
+          loading={isLoading}
         />
       </View>
     </PrimaryView>

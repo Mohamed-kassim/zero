@@ -1,31 +1,48 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image, ImageSourcePropType} from 'react-native';
 import Swiper from 'react-native-swiper';
 import PrimaryText from './PrimaryText';
 import useThemeColors from '../../hooks/useThemeColors';
-import SvgImage from '../../../assets/images/4.svg';
-import SvgImage1 from '../../../assets/images/5.svg';
-import SvgImage2 from '../../../assets/images/6.svg';
 
+import logger from '../../utils/logger';
+
+const data = [
+  {
+    id: '1',
+    image: require('../../../assets/images/4.webp'),
+    text: 'Track your expenses',
+  },
+  {
+    id: '2',
+    image: require('../../../assets/images/5.webp'),
+    text: 'Analyse your spendings',
+  },
+  {
+    id: '3',
+    image: require('../../../assets/images/6.webp'),
+    text: 'Track your Borrowings and Lendings',
+  },
+];
+
+const CarouselItem = ({
+  image,
+  text,
+}: {
+  image: ImageSourcePropType;
+  text: string;
+}) => {
+  logger.rerender('CarouselItem');
+  return (
+    <View style={styles.slide}>
+      <Image source={image} style={styles.image} />
+      <PrimaryText style={styles.itemText}>{text}</PrimaryText>
+    </View>
+  );
+};
 const Carousel = () => {
+  logger.rerender('Carousel');
   const colors = useThemeColors();
-  const data = [
-    {
-      id: '1',
-      image: <SvgImage width="250" height="250" />,
-      text: 'Track your expenses',
-    },
-    {
-      id: '2',
-      image: <SvgImage1 width="250" height="250" />,
-      text: 'Analyse your spendings',
-    },
-    {
-      id: '3',
-      image: <SvgImage2 width="250" height="250" />,
-      text: 'Track your Borrowings and Lendings',
-    },
-  ];
+
   return (
     <Swiper
       style={styles.wrapper}
@@ -33,44 +50,17 @@ const Carousel = () => {
       horizontal={true}
       autoplay
       dot={
-        <View
-          style={{
-            backgroundColor: colors.secondaryAccent,
-            width: 8,
-            height: 8,
-            borderRadius: 4,
-            marginLeft: 3,
-            marginRight: 3,
-            marginTop: 3,
-            marginBottom: 3,
-          }}
-        />
+        <View style={[styles.dot, {backgroundColor: colors.secondaryAccent}]} />
       }
       activeDot={
         <View
-          style={{
-            backgroundColor: colors.primaryText,
-            width: 9,
-            height: 9,
-            borderRadius: 5,
-            marginLeft: 3,
-            marginRight: 3,
-            marginTop: 3,
-            marginBottom: 3,
-          }}
+          style={[styles.activeDot, {backgroundColor: colors.primaryText}]}
         />
       }
-      paginationStyle={{
-        bottom: '15%',
-        left: 0,
-        right: 0,
-      }}
+      paginationStyle={styles.pagination}
       loop>
       {data.map(item => (
-        <View style={styles.slide} key={item.id}>
-          {item.image}
-          <PrimaryText style={{marginTop: '3%'}}>{item.text}</PrimaryText>
-        </View>
+        <CarouselItem key={item.id} image={item.image} text={item.text} />
       ))}
     </Swiper>
   );
@@ -92,6 +82,33 @@ const styles = StyleSheet.create({
   image: {
     height: 250,
     width: 200,
+    resizeMode: 'contain',
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  activeDot: {
+    width: 9,
+    height: 9,
+    borderRadius: 5,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  pagination: {
+    bottom: '15%',
+    left: 0,
+    right: 0,
+  },
+  itemText: {
+    marginTop: '3%',
   },
 });
 
