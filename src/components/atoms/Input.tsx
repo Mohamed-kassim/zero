@@ -5,10 +5,11 @@ import {
   TextInputProps,
   TextStyle,
   View,
+  ViewStyle,
 } from 'react-native';
 import React, {forwardRef} from 'react';
 import PrimaryText from './PrimaryText';
-import textInputStyles from '../../styles/textInput';
+
 import useThemeColors from '../../hooks/useThemeColors';
 import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
@@ -42,29 +43,37 @@ const Error = ({
 export interface InputProps extends TextInputProps {
   label?: string;
   error?: string;
+  leftAccessory?: React.ReactNode;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
-  ({label, error, ...props}, ref) => {
+  ({label, error, leftAccessory, containerStyle, ...props}, ref) => {
     const colors = useThemeColors();
 
     return (
       <View style={styles.container}>
         {label ? <Label label={label} /> : null}
-        <TextInput
-          ref={ref}
-          style={[
-            textInputStyles.textInput,
-            {
-              borderColor: colors.secondaryContainerColor,
-              color: colors.primaryText,
-              backgroundColor: colors.secondaryAccent,
-            },
-          ]}
-          cursorColor={colors.accentGreen}
-          placeholderTextColor={colors.secondaryText}
-          {...props}
-        />
+        <View style={[styles.inputContainer, containerStyle]}>
+          {leftAccessory && (
+            <View style={styles.leftAccessoryContainer}>{leftAccessory}</View>
+          )}
+          <TextInput
+            ref={ref}
+            style={[
+              styles.textInput,
+              leftAccessory ? styles.inputWithLeftAccessory : {},
+              {
+                borderColor: colors.secondaryContainerColor,
+                color: colors.primaryText,
+                backgroundColor: colors.secondaryAccent,
+              },
+            ]}
+            cursorColor={colors.accentGreen}
+            placeholderTextColor={colors.secondaryText}
+            {...props}
+          />
+        </View>
         {error ? <Error error={error} style={styles.error} /> : null}
       </View>
     );
@@ -81,11 +90,25 @@ const styles = StyleSheet.create({
     padding: 20,
     fontFamily: 'FiraCode-Medium',
     includeFontPadding: false,
+    flex: 1,
+    width: '100%',
   },
   container: {
     gap: 5,
   },
   error: {
     fontSize: 12,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  leftAccessoryContainer: {
+    position: 'absolute',
+    left: 20,
+    zIndex: 1,
+  },
+  inputWithLeftAccessory: {
+    paddingLeft: 50,
   },
 });
