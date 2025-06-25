@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSelector, createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../rootReducer';
 import User from '../../db/models/User';
 
@@ -16,7 +16,7 @@ const userSlice = createSlice({
 });
 
 export const selectUser = (state: RootState) => state.user;
-export const selectUserId = (state: RootState) => state.user?._id;
+export const selectUserId = createSelector([selectUser], user => user?._id);
 export const {setUser} = userSlice.actions;
 
 export default userSlice.reducer;
