@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import PrimaryView from '../../components/atoms/PrimaryView';
 import PrimaryText from '../../components/atoms/PrimaryText';
 
-import Carousel from '../../components/atoms/Carousel';
 import {styles} from './styles';
 import useThemeColors from '../../hooks/useThemeColors';
 import {deleteAllData} from '../../services/DeleteService';
