@@ -1,7 +1,7 @@
 import React from 'react';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import ExpenseEntry from '../../components/molecules/ExpenseEntry';
-import Category from '../../db/schemas/CategorySchema';
+import Category from '../../db/models/Category';
 
 export type UpdateTransactionScreenRouteProp = RouteProp<
   {

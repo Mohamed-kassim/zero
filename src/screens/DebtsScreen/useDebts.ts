@@ -8,8 +8,8 @@ import {
 import {useEffect, useState} from 'react';
 import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
-import Debtor from '../../db/schemas/DebtorSchema';
-import Debt from '../../db/schemas/DebtSchema';
+import Debtor from '../../db/models/Debtor';
+import Debt from '../../db/models/Debt';
 
 const useDebts = () => {
   const colors = useThemeColors();

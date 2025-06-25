@@ -4,7 +4,7 @@ import {FETCH_ALL_DEBTOR_DATA} from '../actionTypes';
 import {
   getAllDebtorsByUserId,
   getDebtorByDebtorId,
-} from '../../services/DebtorService';
+} from '../../db/services/DebtorService';
 import {setDebtorData} from '../slice/debtorDataSlice';
 import {
   getIndividualDebtorFaliure,

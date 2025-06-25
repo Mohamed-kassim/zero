@@ -1,10 +1,10 @@
 import Realm from 'realm';
-import User from '../db/schemas/UserSchema';
-import Category from '../db/schemas/CategorySchema';
-import Expense from '../db/schemas/ExpenseSchema';
-import Currency from '../db/schemas/CurrencySchema';
-import Debtor from '../db/schemas/DebtorSchema';
-import Debt from '../db/schemas/DebtSchema';
+import User from '../db/models/User';
+import Category from '../db/models/Category';
+import Expense from '../db/models/Expense';
+import Currency from '../db/models/Currency';
+import Debtor from '../db/models/Debtor';
+import Debt from '../db/models/Debt';
 
 export const realmConfig: Realm.Configuration = {
   schema: [User, Category, Expense, Currency, Debtor, Debt],

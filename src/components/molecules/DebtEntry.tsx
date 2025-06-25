@@ -6,7 +6,7 @@ import PrimaryButton from '../../components/atoms/PrimaryButton';
 import PrimaryView from '../../components/atoms/PrimaryView';
 import {goBack} from '../../utils/navigationUtils';
 import useThemeColors from '../../hooks/useThemeColors';
-import {createDebt, updateDebtById} from '../../services/DebtService';
+import {createDebt, updateDebtById} from '../../db/services/DebtService';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectUserId} from '../../redux/slice/userIdSlice';
 import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';

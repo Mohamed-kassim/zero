@@ -1,29 +1,29 @@
 import Realm, {ObjectSchema} from 'realm';
-import User from './UserSchema';
-import Category from './CategorySchema';
+import User from './User';
+import Debtor from './Debtor';
 
-class Expense extends Realm.Object<Expense> {
+class Debt extends Realm.Object<Debt> {
   _id!: Realm.BSON.ObjectId;
-  title!: string;
+  description!: string;
   amount!: number;
-  description?: string;
-  category!: Category;
+  debtor!: Debtor;
   user!: User;
   date!: string;
+  type!: string;
 
   static schema: ObjectSchema = {
-    name: 'Expense',
+    name: 'Debt',
     properties: {
       _id: 'objectId',
-      title: 'string',
-      amount: 'double',
       description: 'string',
-      category: 'Category',
+      amount: 'double',
+      debtor: 'Debtor',
       user: 'User',
       date: 'string',
+      type: 'string',
     },
     primaryKey: '_id',
   };
 }
 
-export default Expense;
+export default Debt;

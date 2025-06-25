@@ -17,11 +17,11 @@ import currencies from '../../../assets/jsons/currencies.json';
 import {getAppVersion} from '../../utils/getVersion';
 import useThemeColors from '../../hooks/useThemeColors';
 import Storage from '../../utils/storage';
-import {updateUserById} from '../../services/UserService';
-import {updateCurrencyById} from '../../services/CurrencyService';
+import {updateUserById} from '../../db/services/UserService';
+import {updateCurrencyById} from '../../db/services/CurrencyService';
 import {Linking} from 'react-native';
 import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
-import {deleteAllData} from '../../services/DeleteService';
+import {deleteAllData} from '../../db/services/DeleteService';
 import {getAllDataRequest, selectAllData} from '../../redux/slice/allDataSlice';
 
 const useSettings = () => {

@@ -13,9 +13,10 @@ import {
   PersonalizationFormSchema,
   personalizationFormSchema,
 } from '../../utils/validationSchema';
-import {createUser} from '../../services/UserService';
+
 import {navigate} from '../../utils/navigationUtils';
 import useThemeColors from '../../hooks/useThemeColors';
+import {createUser} from '../../db/services/user';
 
 const PersonalizeScreen = () => {
   const colors = useThemeColors();
@@ -23,20 +24,20 @@ const PersonalizeScreen = () => {
     resolver: zodResolver(personalizationFormSchema),
   });
   const email = 'null';
-
+  // TODO: user can go back to the previous screen and recreate the user with the same data
   const onSubmit = async (data: PersonalizationFormSchema) => {
     try {
-      // await nameSchema.parseAsync({name});
-      await createUser(data.name, email);
+      await createUser({username: data.name, email});
       navigate('OnboardingScreen');
     } catch (error) {
       console.error('Error saving user data to Realm:', error);
     }
   };
+  // TODO: how should we skip if the email is required in the db?
 
   const onSkip = async () => {
     try {
-      await createUser('User', email);
+      await createUser({username: 'User', email: 'Test@gmail.com'});
       navigate('OnboardingScreen');
     } catch (error) {
       console.error('Error saving demo user data to Realm:', error);
@@ -73,10 +74,10 @@ const PersonalizeScreen = () => {
           accessibilityHint="Enter the name that your friends call you"
           accessibilityRole="text"
           autoCapitalize="words"
-          autoComplete="name"
+          autoComplete="username"
           autoCorrect={false}
           returnKeyType="done"
-          textContentType="name"
+          textContentType="username"
           enablesReturnKeyAutomatically
           onSubmitEditing={handleSubmit(onSubmit)}
         />

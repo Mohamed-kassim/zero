@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {getRealm} from '../utils/realmService';
+import {getRealm} from '../../utils/realmService';
 
 export const createExpense = async (
   userId: Realm.BSON.ObjectId,

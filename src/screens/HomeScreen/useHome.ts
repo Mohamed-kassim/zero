@@ -16,7 +16,7 @@ import {
   FETCH_CURRENCY_DATA,
 } from '../../redux/actionTypes';
 import moment from 'moment';
-import Expense from '../../db/schemas/ExpenseSchema';
+import Expense from '../../db/models/Expense';
 
 const useHome = () => {
   const colors = useThemeColors();

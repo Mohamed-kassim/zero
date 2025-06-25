@@ -1,4 +1,4 @@
-import {getRealm} from '../utils/realmService';
+import {getRealm} from '../../utils/realmService';
 
 export const createCurrency = async (
   code: string,

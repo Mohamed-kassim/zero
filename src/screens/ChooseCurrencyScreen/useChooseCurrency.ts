@@ -2,11 +2,11 @@ import {useState} from 'react';
 import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectUserId} from '../../redux/slice/userIdSlice';
-import {createCurrency} from '../../services/CurrencyService';
+import {createCurrency} from '../../db/services/CurrencyService';
 
 import {setIsOnboarded} from '../../redux/slice/isOnboardedSlice';
 import currencies from '../../../assets/jsons/currencies.json';
-import Currency from '../../db/schemas/CurrencySchema';
+import Currency from '../../db/models/Currency';
 import Storage from '../../utils/storage';
 
 const useChooseCurrency = () => {

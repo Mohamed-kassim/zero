@@ -4,8 +4,8 @@ import {useEffect, useState} from 'react';
 import {selectUserId} from '../../redux/slice/userIdSlice';
 import {navigate} from '../../utils/navigationUtils';
 import {FETCH_ALL_USER_DATA} from '../../redux/actionTypes';
-import {createCategory} from '../../services/CategoryService';
-import Category from '../../db/schemas/CategorySchema';
+import {createCategory} from '../../db/services/CategoryService';
+import Category from '../../db/models/Category';
 
 const useOnboarding = () => {
   const colors = useThemeColors();

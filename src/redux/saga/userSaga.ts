@@ -1,5 +1,5 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {getAllUsers} from '../../services/UserService';
+import {getAllUsers} from '../../db/services/UserService';
 import {setUserId} from '../slice/userIdSlice';
 import {setUserName} from '../slice/userNameSlice';
 import {setUserEmail} from '../slice/userEmailSlice';

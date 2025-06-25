@@ -9,19 +9,19 @@ import {Linking, Platform} from 'react-native';
 import {requestStoragePermission} from '../../utils/dataUtils';
 import DocumentPicker from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
-import {createUser} from '../../services/UserService';
+import {createUser} from '../../db/services/UserService';
 import {
   FETCH_ALL_CATEGORY_DATA,
   FETCH_ALL_DEBTOR_DATA,
   FETCH_ALL_USER_DATA,
   FETCH_CURRENCY_DATA,
 } from '../../redux/actionTypes';
-import {deleteAllData} from '../../services/DeleteService';
-import {createCategory} from '../../services/CategoryService';
-import {createDebtor} from '../../services/DebtorService';
-import {createCurrency} from '../../services/CurrencyService';
-import {createExpense} from '../../services/ExpenseService';
-import {createDebt} from '../../services/DebtService';
+import {deleteAllData} from '../../db/services/DeleteService';
+import {createCategory} from '../../db/services/CategoryService';
+import {createDebtor} from '../../db/services/DebtorService';
+import {createCurrency} from '../../db/services/CurrencyService';
+import {createExpense} from '../../db/services/ExpenseService';
+import {createDebt} from '../../db/services/DebtService';
 import {getExpenseRequest} from '../../redux/slice/expenseDataSlice';
 import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';
 

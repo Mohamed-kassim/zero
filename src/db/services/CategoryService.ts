@@ -1,4 +1,4 @@
-import {getRealm} from '../utils/realmService';
+import {getRealm} from '../../utils/realmService';
 
 export const createCategory = async (
   name: string,
@@ -86,7 +86,9 @@ export const getAllCategoriesByUserId = async (userId: Realm.BSON.ObjectId) => {
   const realm = await getRealm();
   const categories = realm.objects('Category');
   const categoriesByUserId = Array.from(categories).filter(category => {
-    return category.isValid() && category.user && category.user._id.equals(userId);
+    return (
+      category.isValid() && category.user && category.user._id.equals(userId)
+    );
   });
 
   return categoriesByUserId;

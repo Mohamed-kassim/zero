@@ -8,7 +8,7 @@ import {navigate} from '../../utils/navigationUtils';
 import PrimaryText from '../atoms/PrimaryText';
 import useSettings from '../../screens/SettingsScreen/useSettings';
 import ChangeNameModal from './ChangeNameModal';
-import {updateUserById} from '../../services/UserService';
+import {updateUserById} from '../../db/services/UserService';
 import {selectUserId} from '../../redux/slice/userIdSlice';
 
 interface HeaderContainerProps {

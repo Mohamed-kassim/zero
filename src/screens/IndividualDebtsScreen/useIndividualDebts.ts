@@ -11,14 +11,14 @@ import {goBack, navigate} from '../../utils/navigationUtils';
 import {
   deleteAllDebtsbyDebtorId,
   deleteDebtById,
-} from '../../services/DebtService';
+} from '../../db/services/DebtService';
 import {getAllDebtRequest} from '../../redux/slice/allDebtDataSlice';
 import {RouteProp} from '@react-navigation/native';
 import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
-import {deleteDebtorById} from '../../services/DebtorService';
+import {deleteDebtorById} from '../../db/services/DebtorService';
 import {FETCH_ALL_DEBTOR_DATA} from '../../redux/actionTypes';
 import moment from 'moment';
-import Debt from '../../db/schemas/DebtSchema';
+import Debt from '../../db/models/Debt';
 import useAmountColor from '../../hooks/useAmountColor';
 import {
   getIndividualDebtorRequest,

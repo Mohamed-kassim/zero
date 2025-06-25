@@ -3,7 +3,7 @@ import useThemeColors from '../../hooks/useThemeColors';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
 import {RouteProp} from '@react-navigation/native';
-import Expense from '../../db/schemas/ExpenseSchema';
+import Expense from '../../db/models/Expense';
 import {useEffect} from 'react';
 import {
   getEverydayExpenseRequest,

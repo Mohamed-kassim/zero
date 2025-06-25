@@ -1,6 +1,6 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../rootReducer';
-import Debtor from '../../db/schemas/DebtorSchema';
+import Debtor from '../../db/models/Debtor';
 
 const initialState = {
   debtorData: [],

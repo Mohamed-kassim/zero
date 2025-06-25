@@ -2,7 +2,7 @@ import {call, put, select, takeLatest} from 'redux-saga/effects';
 import {setCurrencyData} from '../slice/currencyDataSlice';
 import {FETCH_CURRENCY_DATA} from '../actionTypes';
 import {selectUserId} from '../slice/userIdSlice';
-import {getCurrencyByUserId} from '../../services/CurrencyService';
+import {getCurrencyByUserId} from '../../db/services/CurrencyService';
 
 function* fetchCurrency(): Generator<any, void, any> {
   try {

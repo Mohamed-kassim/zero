@@ -5,7 +5,7 @@ import PrimaryText from '../../components/atoms/PrimaryText';
 
 import {styles} from './styles';
 import useThemeColors from '../../hooks/useThemeColors';
-import {deleteAllData} from '../../services/DeleteService';
+import {deleteAllData} from '../../db/services/DeleteService';
 import {navigate} from '../../utils/navigationUtils';
 import Button from '../../components/atoms/Button';
 import OnboardingCarousel from '../../components/molecules/OnboardingCarousel';

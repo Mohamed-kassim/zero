@@ -9,7 +9,7 @@ import useReports from './useReports';
 import PrimaryView from '../../components/atoms/PrimaryView';
 import PrimaryText from '../../components/atoms/PrimaryText';
 import PieChartLabels from '../../components/atoms/PieChartLabels';
-import Expense from '../../db/schemas/ExpenseSchema';
+import Expense from '../../db/models/Expense';
 import EmptyState from '../../components/atoms/EmptyState';
 import {formatCurrency} from '../../utils/numberUtils';
 

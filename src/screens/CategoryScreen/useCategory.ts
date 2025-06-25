@@ -4,7 +4,7 @@ import {selectActiveCategories} from '../../redux/slice/categoryDataSlice';
 import {useEffect, useState} from 'react';
 import {FETCH_ALL_CATEGORY_DATA} from '../../redux/actionTypes';
 import {navigate} from '../../utils/navigationUtils';
-import {softDeleteCategoryById} from '../../services/CategoryService';
+import {softDeleteCategoryById} from '../../db/services/CategoryService';
 
 const useCategory = () => {
   const colors = useThemeColors();

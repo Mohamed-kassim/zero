@@ -1,6 +1,6 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import Debt from '../../db/schemas/DebtSchema';
+import Debt from '../../db/models/Debt';
 import PrimaryText from '../atoms/PrimaryText';
 import Icon from '../atoms/Icons';
 import moment from 'moment';

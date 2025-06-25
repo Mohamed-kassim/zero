@@ -1,5 +1,5 @@
 import Realm, {ObjectSchema} from 'realm';
-import User from './UserSchema';
+import User from './User';
 
 class Category extends Realm.Object<Category> {
   _id!: Realm.BSON.ObjectId;
@@ -17,7 +17,7 @@ class Category extends Realm.Object<Category> {
       categoryStatus: 'bool',
       user: 'User',
       icon: {type: 'string', optional: true},
-      color: 'string'
+      color: 'string',
     },
     primaryKey: '_id',
   };

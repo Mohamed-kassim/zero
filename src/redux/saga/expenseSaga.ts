@@ -3,7 +3,7 @@ import {selectUserId} from '../slice/userIdSlice';
 import {
   getAllExpensesByDate,
   getAllExpensesByUserId,
-} from '../../services/ExpenseService';
+} from '../../db/services/ExpenseService';
 import {
   getExpenseFaliure,
   getExpenseRequest,

@@ -22,12 +22,12 @@ import {selectUserId} from '../../redux/slice/userIdSlice';
 import {
   createCategory,
   updateCategoryById,
-} from '../../services/CategoryService';
+} from '../../db/services/CategoryService';
 import {FETCH_ALL_CATEGORY_DATA} from '../../redux/actionTypes';
 import mainStyles from '../../styles/main';
 import {categorySchema} from '../../utils/validationSchema';
 import onboardingStyles from '../../screens/OnboardingScreen/style';
-import Category from '../../db/schemas/CategorySchema';
+import Category from '../../db/models/Category';
 import defaultCategories from '../../../assets/jsons/defaultCategories.json';
 import {selectCategoryData} from '../../redux/slice/categoryDataSlice';
 

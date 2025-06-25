@@ -8,7 +8,7 @@ import styles from './style';
 import useCategory from './useCategory';
 import PrimaryView from '../../components/atoms/PrimaryView';
 import PrimaryText from '../../components/atoms/PrimaryText';
-import Category from '../../db/schemas/CategorySchema';
+import Category from '../../db/models/Category';
 import EmptyState from '../../components/atoms/EmptyState';
 
 const CategoryScreen = () => {

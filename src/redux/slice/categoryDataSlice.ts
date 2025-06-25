@@ -1,6 +1,6 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../rootReducer';
-import Category from '../../db/schemas/CategorySchema';
+import Category from '../../db/models/Category';
 
 const initialState = {
   categoryData: [],

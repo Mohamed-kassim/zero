@@ -15,7 +15,10 @@ import {selectCurrencySymbol} from '../../redux/slice/currencyDataSlice';
 import {selectUserId} from '../../redux/slice/userIdSlice';
 import {selectActiveCategories} from '../../redux/slice/categoryDataSlice';
 import {FETCH_ALL_CATEGORY_DATA} from '../../redux/actionTypes';
-import {createExpense, updateExpenseById} from '../../services/ExpenseService';
+import {
+  createExpense,
+  updateExpenseById,
+} from '../../db/services/ExpenseService';
 import {getExpenseRequest} from '../../redux/slice/expenseDataSlice';
 import mainStyles from '../../styles/main';
 import DatePicker from '../atoms/DatePicker';

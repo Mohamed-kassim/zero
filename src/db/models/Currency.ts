@@ -1,5 +1,5 @@
 import Realm, {ObjectSchema} from 'realm';
-import User from './UserSchema';
+import User from './User';
 
 class Currency extends Realm.Object<Currency> {
   _id!: Realm.BSON.ObjectId;
