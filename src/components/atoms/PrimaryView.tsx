@@ -1,6 +1,6 @@
 import {StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
 import React, {ReactNode} from 'react';
-import useThemeColors from '../../hooks/useThemeColors';
+import useThemeColors, {useThemePreference} from '../../hooks/useThemeColors';
 
 interface PrimaryViewProps {
   children?: ReactNode;
@@ -9,7 +9,8 @@ interface PrimaryViewProps {
 
 const PrimaryView: React.FC<PrimaryViewProps> = ({children, style}) => {
   const colors = useThemeColors();
-  const isDark = colors.primaryBackground === '#0F0F0F';
+  const theme = useThemePreference();
+  const isDark = theme === 'dark';
   return (
     <View
       style={[

@@ -64,21 +64,20 @@ const Colors = {
 };
 
 const useThemeColors = () => {
-  const selectedThemePreference = useSelector(selectThemePreference);
-
-  const colorScheme = useColorScheme();
+  const theme = useThemePreference();
   const colors = useMemo(() => {
-    if (
-      selectedThemePreference === 'system' ||
-      selectedThemePreference === null
-    ) {
-      return Colors[colorScheme];
-    } else {
-      return Colors[selectedThemePreference];
-    }
-  }, [selectedThemePreference, colorScheme]);
+    return Colors[theme];
+  }, [theme]);
 
   return colors;
+};
+export const useThemePreference = () => {
+  const selectedThemePreference = useSelector(selectThemePreference);
+  const colorScheme = useColorScheme();
+  return selectedThemePreference === 'system' ||
+    selectedThemePreference === null
+    ? colorScheme
+    : selectedThemePreference;
 };
 
 export default useThemeColors;
