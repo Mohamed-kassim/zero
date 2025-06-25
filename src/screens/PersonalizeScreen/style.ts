@@ -1,12 +1,21 @@
 import {StyleSheet} from 'react-native';
 
 const personalizeStyles = StyleSheet.create({
-  titleTextContainer: {
-    paddingTop: '15%',
+  container: {
+    justifyContent: 'space-between',
   },
-  subtitleTextContainer: {
-    paddingTop: '10%',
-    paddingBottom: '5%',
+  contentContainer: {
+    gap: 20,
+    flex: 1,
+  },
+  titleText: {
+    fontSize: 24,
+  },
+  titleContainer: {
+    gap: 10,
+  },
+  subtitleText: {
+    fontSize: 15,
   },
   textInput: {
     height: 60,
@@ -23,6 +32,9 @@ const personalizeStyles = StyleSheet.create({
   skipButtonContainer: {
     alignSelf: 'flex-end',
     paddingTop: '5%',
+  },
+  buttonContainer: {
+    marginBottom: '5%',
   },
 });
 

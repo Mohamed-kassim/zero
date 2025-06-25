@@ -1,66 +1,93 @@
-import {TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
-import PrimaryButton from '../../components/atoms/PrimaryButton';
 import styles from './style';
-import usePersonalize from './usePersonalize';
-import PrimaryView from '../../components/atoms/PrimaryView';
+
 import PrimaryText from '../../components/atoms/PrimaryText';
-import CustomInput from '../../components/atoms/CustomInput';
+
+import Screen from '../../components/atoms/Screen';
+import Button from '../../components/atoms/Button';
+import {useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import ControlledInput from '../../components/atoms/ControlledInput';
+import {
+  PersonalizationFormSchema,
+  personalizationFormSchema,
+} from '../../utils/validationSchema';
+import {createUser} from '../../services/UserService';
+import {navigate} from '../../utils/navigationUtils';
+import useThemeColors from '../../hooks/useThemeColors';
 
 const PersonalizeScreen = () => {
-  const {colors, setName, name, handleSubmit, handleSkip, nameSchema} =
-    usePersonalize();
-  const isValid = nameSchema.safeParse(name).success;
+  const colors = useThemeColors();
+  const {control, handleSubmit} = useForm<PersonalizationFormSchema>({
+    resolver: zodResolver(personalizationFormSchema),
+  });
+  const email = 'null';
+
+  const onSubmit = async (data: PersonalizationFormSchema) => {
+    try {
+      // await nameSchema.parseAsync({name});
+      await createUser(data.name, email);
+      navigate('OnboardingScreen');
+    } catch (error) {
+      console.error('Error saving user data to Realm:', error);
+    }
+  };
+
+  const onSkip = async () => {
+    try {
+      await createUser('User', email);
+      navigate('OnboardingScreen');
+    } catch (error) {
+      console.error('Error saving demo user data to Realm:', error);
+    }
+    navigate('OnboardingScreen');
+  };
 
   return (
-    <PrimaryView style={{justifyContent: 'space-between'}}>
-      <View>
-        <TouchableOpacity
+    <Screen style={styles.container} edges={['top', 'bottom']}>
+      <View style={styles.contentContainer}>
+        <Button
           style={styles.skipButtonContainer}
-          onPress={handleSkip}>
-          <PrimaryText style={{color: colors.accentGreen, fontSize: 12}}>
-            skip
+          variant="ghost"
+          title="skip"
+          textColor={colors.accentGreen}
+          onPress={onSkip}
+        />
+        <View style={styles.titleContainer}>
+          <PrimaryText style={styles.titleText}>
+            Let's Personalize your{'\n'}experience
           </PrimaryText>
-        </TouchableOpacity>
 
-        <View style={styles.titleTextContainer}>
-          <PrimaryText style={{fontSize: 24}}>
-            Let's Personlize your
-          </PrimaryText>
-          <PrimaryText style={{fontSize: 24}}>experience</PrimaryText>
-        </View>
-
-        <View style={styles.subtitleTextContainer}>
-          <PrimaryText style={{color: colors.accentGreen, fontSize: 15}}>
-            Hi, It's zer0! What Do Your Friends
-          </PrimaryText>
-          <PrimaryText style={{color: colors.accentGreen, fontSize: 15}}>
-            Call You?
+          <PrimaryText
+            style={[styles.subtitleText, {color: colors.accentGreen}]}>
+            Hi, It's zer0! What Do Your Friends{'\n'}Call You?
           </PrimaryText>
         </View>
-
-        <View
-          style={[
-            styles.textInputContainer,
-            isValid ? {marginBottom: '100%'} : null,
-          ]}>
-          <CustomInput
-            input={name}
-            label={'Name'}
-            placeholder={'eg. Indranil Bhuin'}
-            setInput={setName}
-            schema={nameSchema}
-          />
-        </View>
-      </View>
-      <View style={{marginBottom: '10%'}}>
-        <PrimaryButton
-          onPress={handleSubmit}
-          buttonTitle={'Continue'}
-          disabled={!isValid}
+        <ControlledInput
+          name="name"
+          control={control}
+          label={'Name'}
+          placeholder={'eg. Indranil Bhuin'}
+          accessibilityLabel="Enter your name"
+          accessibilityHint="Enter the name that your friends call you"
+          accessibilityRole="text"
+          autoCapitalize="words"
+          autoComplete="name"
+          autoCorrect={false}
+          returnKeyType="done"
+          textContentType="name"
+          enablesReturnKeyAutomatically
+          onSubmitEditing={handleSubmit(onSubmit)}
         />
       </View>
-    </PrimaryView>
+
+      <Button
+        onPress={handleSubmit(onSubmit)}
+        title={'Continue'}
+        style={styles.buttonContainer}
+      />
+    </Screen>
   );
 };
 
