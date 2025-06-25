@@ -1,11 +1,11 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import PrimaryText from '../atoms/PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors from '../../hooks/useThemeColors';
 
 interface SecondaryButtonProps {
   onPress(): void;
-  colors: Colors;
+
   buttonText: string;
   width: number;
 }
@@ -13,9 +13,10 @@ interface SecondaryButtonProps {
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   onPress,
   buttonText,
-  colors,
+
   width,
 }) => {
+  const colors = useThemeColors();
   return (
     <TouchableOpacity onPress={onPress}>
       <View

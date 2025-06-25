@@ -7,8 +7,9 @@ import {
   StyleProp,
   View,
   ActivityIndicator,
+  PressableStateCallbackType,
 } from 'react-native';
-import React from 'react';
+import React, {useCallback} from 'react';
 import PrimaryText from './PrimaryText';
 import useThemeColors from '../../hooks/useThemeColors';
 
@@ -29,28 +30,39 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const colors = useThemeColors();
+  const pressableStyle = useCallback(
+    ({pressed}: PressableStateCallbackType) =>
+      [
+        styles.button,
+        {
+          ...(variant === 'primary' && {
+            backgroundColor: colors.primaryText,
+          }),
+          ...(variant === 'secondary' && {
+            backgroundColor: colors.secondaryContainerColor,
+            borderColor: colors.secondaryAccent,
+          }),
+        },
+        // iOS behavior: opacity change
+        Platform.OS === 'ios' && pressed && styles.iosPressed,
+        // Android behavior: slight scale and opacity
+        Platform.OS === 'android' && pressed && styles.androidPressed,
+        disabled && styles.disabled,
+        disabled && {
+          backgroundColor:
+            variant === 'primary'
+              ? colors.secondaryText
+              : colors.secondaryContainerColor,
+        },
+        style,
+      ] as StyleProp<ViewStyle>,
+    [variant, colors, disabled, style],
+  );
   return (
     <View style={styles.buttonContainer}>
       <Pressable
         disabled={disabled || loading}
-        style={({pressed}) =>
-          [
-            styles.button,
-            {
-              backgroundColor:
-                variant === 'primary'
-                  ? colors.primaryText
-                  : colors.secondaryText,
-            },
-            // iOS behavior: opacity change
-            Platform.OS === 'ios' && pressed && styles.iosPressed,
-            // Android behavior: slight scale and opacity
-            Platform.OS === 'android' && pressed && styles.androidPressed,
-            disabled && styles.disabled,
-            disabled && {backgroundColor: colors.secondaryText},
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        style={pressableStyle}
         // Android ripple effect
         android_ripple={
           Platform.OS === 'android'
@@ -71,7 +83,16 @@ const Button: React.FC<ButtonProps> = ({
           {loading && (
             <ActivityIndicator size="small" color={colors.buttonText} />
           )}
-          <PrimaryText style={[styles.buttonText, {color: colors.buttonText}]}>
+          <PrimaryText
+            style={[
+              styles.buttonText,
+              {
+                color:
+                  variant === 'primary'
+                    ? colors.buttonText
+                    : colors.primaryText,
+              },
+            ]}>
             {title}
           </PrimaryText>
         </View>
