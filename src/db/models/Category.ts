@@ -26,7 +26,7 @@ export type UpdateCategorySchema = z.infer<typeof updateCategorySchema>;
 export const deleteCategorySchema = categorySchema.pick({_id: true});
 export type DeleteCategorySchema = z.infer<typeof deleteCategorySchema>;
 
-class Category extends Realm.Object<CategorySchema> {
+class Category extends Realm.Object<Category> {
   _id!: Realm.BSON.ObjectId;
   name!: string;
   archived!: boolean;

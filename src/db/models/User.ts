@@ -25,7 +25,7 @@ export type DeleteUserSchema = z.infer<typeof deleteUserSchema>;
 
 export type UserSchema = z.infer<typeof userSchema>;
 
-class User extends Realm.Object<UserSchema> {
+class User extends Realm.Object<User> {
   _id!: Realm.BSON.ObjectId;
   username!: string;
   email!: string;

@@ -1,5 +1,32 @@
 import Realm, {ObjectSchema} from 'realm';
-import User from './User';
+import User, {userSchema} from './User';
+import {z} from 'zod';
+import {objectIdSchema} from '../utils';
+
+export const debtorSchema = z.object({
+  _id: objectIdSchema,
+  title: z.string().min(1),
+  type: z.string(),
+  debtorStatus: z.boolean(),
+  user: userSchema.nullable(),
+  icon: z.string().optional().nullable(),
+  color: z.string().nullable(),
+});
+
+export type DebtorSchema = z.infer<typeof debtorSchema>;
+
+export const createDebtorSchema = debtorSchema
+  .omit({_id: true, user: true, debtorStatus: true})
+  .extend({
+    userId: objectIdSchema,
+  });
+export type CreateDebtorSchema = z.infer<typeof createDebtorSchema>;
+
+export const updateDebtorSchema = debtorSchema.partial();
+export type UpdateDebtorSchema = z.infer<typeof updateDebtorSchema>;
+
+export const deleteDebtorSchema = debtorSchema.pick({_id: true});
+export type DeleteDebtorSchema = z.infer<typeof deleteDebtorSchema>;
 
 class Debtor extends Realm.Object<Debtor> {
   _id!: Realm.BSON.ObjectId;
