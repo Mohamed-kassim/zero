@@ -3,7 +3,7 @@ import User, {userSchema} from './User';
 import {z} from 'zod';
 import {objectIdSchema} from '../utils';
 
-const currencySchema = z.object({
+export const currencySchema = z.object({
   _id: objectIdSchema,
   code: z.string(),
   symbol: z.string(),
