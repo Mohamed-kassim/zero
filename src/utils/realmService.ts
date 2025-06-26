@@ -8,31 +8,31 @@ import Debt from '../db/models/Debt';
 
 export const realmConfig: Realm.Configuration = {
   schema: [User, Category, Expense, Currency, Debtor, Debt],
-  schemaVersion: 2,
-  onMigration: (oldRealm: Realm, newRealm: Realm) => {
-    if (oldRealm.schemaVersion < 1) {
-      const oldCategories = oldRealm.objects('Category');
-      const newCategories = newRealm.objects('Category');
+  schemaVersion: 0,
+  // onMigration: (oldRealm: Realm, newRealm: Realm) => {
+  //   if (oldRealm.schemaVersion < 1) {
+  //     const oldCategories = oldRealm.objects('Category');
+  //     const newCategories = newRealm.objects('Category');
 
-      for (let index = 0; index < oldCategories.length; index++) {
-        const oldCategory = oldCategories[index];
-        const newCategory = newCategories[index];
+  //     for (let index = 0; index < oldCategories.length; index++) {
+  //       const oldCategory = oldCategories[index];
+  //       const newCategory = newCategories[index];
 
-        newCategory.archived = oldCategory.categoryStatus;
-      }
-    }
-    if (oldRealm.schemaVersion < 2) {
-      const oldDebtors = oldRealm.objects('Debtor');
-      const newDebtors = newRealm.objects('Debtor');
+  //       newCategory.archived = oldCategory.categoryStatus;
+  //     }
+  //   }
+  //   if (oldRealm.schemaVersion < 2) {
+  //     const oldDebtors = oldRealm.objects('Debtor');
+  //     const newDebtors = newRealm.objects('Debtor');
 
-      for (let index = 0; index < oldDebtors.length; index++) {
-        const oldDebtor = oldDebtors[index];
-        const newDebtor = newDebtors[index];
+  //     for (let index = 0; index < oldDebtors.length; index++) {
+  //       const oldDebtor = oldDebtors[index];
+  //       const newDebtor = newDebtors[index];
 
-        newDebtor.archived = oldDebtor.debtorStatus;
-      }
-    }
-  },
+  //       newDebtor.archived = oldDebtor.debtorStatus;
+  //     }
+  //   }
+  // },
 };
 
 export const getRealm = () => {

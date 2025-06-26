@@ -21,7 +21,7 @@ import {updateUserById} from '../../db/services/UserService';
 import {updateCurrencyById} from '../../db/services/CurrencyService';
 import {Linking} from 'react-native';
 import {setIsOnboarded} from '../../redux/slices/isOnboardedSlice';
-import {deleteAllData} from '../../db/services/DeleteService';
+import {deleteAllData} from '../../db/services/core';
 import {
   getAllDataRequest,
   selectAllData,

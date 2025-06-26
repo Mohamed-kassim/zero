@@ -31,10 +31,3 @@ export const closeDBInstance = async () => {
     dbInstance = null;
   }
 };
-
-export const deleteAllData = async () => {
-  const realm = await getDBInstance();
-  realm.write(() => {
-    realm.deleteAll();
-  });
-};
