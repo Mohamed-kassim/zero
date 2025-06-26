@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import Icon from '../../components/atoms/Icons';
 
@@ -14,8 +14,8 @@ import Input from '../../components/atoms/Input';
 import currencies from '../../../assets/jsons/currencies.json';
 import useThemeColors from '../../hooks/useThemeColors';
 import {useSetIsOnboarded} from '../../redux/slices/isOnboardedSlice';
-import {createCurrency} from '../../db/services/CurrencyService';
-
+import {createCurrency} from '../../db/services/currency';
+import Realm from 'realm';
 import {useUserId} from '../../redux/slices/userSlice';
 
 const filterCurrencies = (search: string) => {
@@ -32,28 +32,38 @@ const ChooseCurrencyScreen = () => {
   logger.rerender('ChooseCurrencyScreen');
   const colors = useThemeColors();
   const [selectedCurrency, setSelectedCurrency] = useState<any>(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   const userId = useUserId();
   const [search, setSearch] = useState('');
   const filteredCurrencies = filterCurrencies(search);
 
-  const handleCurrencySelect = (currency: any) => {
-    setSelectedCurrency(currency);
-  };
+  const handleCurrencySelect = useCallback(
+    (currency: any) => {
+      setSelectedCurrency(currency);
+    },
+    [setSelectedCurrency],
+  );
 
   const setIsOnboarded = useSetIsOnboarded();
 
   const handleCurrencySubmit = async () => {
-    if (selectedCurrency) {
-      console.log('second');
-      await createCurrency(
-        selectedCurrency.code,
-        selectedCurrency.symbol,
-        selectedCurrency.name,
-        Realm.BSON.ObjectID.createFromHexString(userId),
-      );
+    try {
+      if (selectedCurrency) {
+        setIsLoading(true);
+        await createCurrency({
+          code: selectedCurrency.code,
+          symbol: selectedCurrency.symbol,
+          name: selectedCurrency.name,
+          userId: Realm.BSON.ObjectId.createFromHexString(userId ?? ''),
+        });
+        setIsLoading(false);
 
-      setIsOnboarded(true);
+        setIsOnboarded(true);
+      }
+    } catch (error) {
+      console.log('error in handleCurrencySubmit', error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -88,7 +98,11 @@ const ChooseCurrencyScreen = () => {
         />
       </View>
       <View style={personalizeStyles.buttonContainer}>
-        <Button onPress={handleCurrencySubmit} title={'Continue'} />
+        <Button
+          onPress={handleCurrencySubmit}
+          title={'Continue'}
+          loading={isLoading}
+        />
       </View>
     </Screen>
   );

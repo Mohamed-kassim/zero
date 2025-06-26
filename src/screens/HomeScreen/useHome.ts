@@ -7,16 +7,15 @@ import {
   selectExpenseError,
   selectExpenseLoading,
 } from '../../redux/slices/expenseDataSlice';
-import {selectUserName} from '../../redux/slices/userNameSlice';
-import {selectUserId} from '../../redux/slices/userSlice';
+
 import {selectCurrencySymbol} from '../../redux/slices/currencyDataSlice';
 import {
   FETCH_ALL_CATEGORY_DATA,
-  FETCH_ALL_USER_DATA,
   FETCH_CURRENCY_DATA,
 } from '../../redux/actionTypes';
 import moment from 'moment';
 import Expense from '../../db/models/Expense';
+import {useUser} from '../../redux/slices/userSlice';
 
 const useHome = () => {
   const colors = useThemeColors();
@@ -31,8 +30,9 @@ const useHome = () => {
 
   const expenseLoading = useSelector(selectExpenseLoading);
   const expenseError = useSelector(selectExpenseError);
-  const userName = useSelector(selectUserName);
-  const userId = useSelector(selectUserId);
+  const user = useUser();
+  const userName = user?.username;
+  const userId = user?._id;
   const currencySymbol = useSelector(selectCurrencySymbol);
 
   const onRefresh = () => {
@@ -40,10 +40,9 @@ const useHome = () => {
   };
 
   useEffect(() => {
-    dispatch({type: FETCH_ALL_USER_DATA});
     dispatch({type: FETCH_CURRENCY_DATA});
     dispatch({type: FETCH_ALL_CATEGORY_DATA});
-  }, [userId, userName, currencySymbol]);
+  }, [currencySymbol]);
 
   useEffect(() => {
     dispatch(getExpenseRequest());

@@ -8,7 +8,7 @@ import {goBack} from '../../utils/navigationUtils';
 import useThemeColors from '../../hooks/useThemeColors';
 import {createDebt, updateDebtById} from '../../db/services/DebtService';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectUserId} from '../../redux/slices/userIdSlice';
+import {selectUserId} from '../../redux/slices/userSlice';
 import {getAllDebtRequest} from '../../redux/slices/allDebtDataSlice';
 import {getDebtRequest} from '../../redux/slices/debtDataSlice';
 import mainStyles from '../../styles/main';
@@ -63,7 +63,7 @@ const DebtEntry: React.FC<DebtEntryProps> = ({buttonText, route}) => {
   console.log('debts', debtsType);
 
   const handleAddDebt = () => {
-    if (!isValid) {
+    if (!isValid || !userId) {
       return;
     }
     try {

@@ -10,7 +10,6 @@ const MainStack = () => {
   logger.rerender('MainStack');
 
   const isOnboarded = useSelector(selectIsOnboarded);
-
   if (!isOnboarded) {
     return <OnboardingStack />;
   }

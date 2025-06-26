@@ -85,7 +85,7 @@ const OnboardingScreen = () => {
         selectedCategories.map(category => ({
           name: category.name,
           color: category.color,
-          userId: user?._id,
+          userId: Realm.BSON.ObjectId.createFromHexString(user?._id ?? ''),
           icon: category.icon,
         })),
       );

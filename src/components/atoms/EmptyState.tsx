@@ -1,7 +1,7 @@
 import {Image, StyleSheet, View, ViewStyle} from 'react-native';
 import React from 'react';
 import PrimaryText from './PrimaryText';
-import {Colors} from '../../hooks/useThemeColors';
+import useThemeColors, {Colors} from '../../hooks/useThemeColors';
 
 interface EmptyStateProps {
   colors: Colors;
@@ -23,7 +23,8 @@ const darkImages = {
   Categories: require('../../../assets/images/darkNoCategory.png'),
 } as Record<string, any>;
 
-const EmptyState: React.FC<EmptyStateProps> = ({colors, type, style}) => {
+const EmptyState: React.FC<EmptyStateProps> = ({type, style}) => {
+  const colors = useThemeColors();
   const selectedLightImage = lightImages[type];
   const selectedDarkImage = darkImages[type];
   return (
