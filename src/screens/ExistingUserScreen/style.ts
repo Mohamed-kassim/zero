@@ -5,25 +5,53 @@ const existingUserStyles = StyleSheet.create({
     paddingTop: '10%',
   },
   uploadContainer: {
-    height: 50,
-    width: 50,
-    borderWidth: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
+    flexDirection: 'row',
+
     marginRight: 5,
   },
-  uploadContent: {
+  importButtonContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
+    gap: 10,
   },
-  settingsContainer: {
+  importIconContainer: {
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  importButtonContent: {
+    flex: 1,
+  },
+  importButtonLoadingContainer: {
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  importButtonText: {
+    fontSize: 13,
+  },
+  syncEntityButtonContainer: {
     borderWidth: 2,
     borderRadius: 8,
     height: 65,
     justifyContent: 'space-between',
     padding: 10,
+    gap: 10,
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  syncEntityButtonContent: {
+    flex: 1,
+  },
+  syncEntityButtonLeftContainer: {
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   individualSettingsContainer: {
     flexDirection: 'row',
