@@ -26,25 +26,23 @@ const ITEM_SIZE = 100;
 const CurrencyItem = React.memo(
   (props: {
     currency: Currency;
-    selectedCurrency: Partial<Currency> | null;
+    isSelected: boolean;
     handleCurrencySelect: (currency: Currency) => void;
   }) => {
     logger.rerender('CurrencyItem');
     const colors = useThemeColors();
-    const {currency, selectedCurrency, handleCurrencySelect} = props;
+    const {currency, isSelected, handleCurrencySelect} = props;
     return (
       <TouchableOpacity
         style={[
           styles.itemContainer,
           {
-            backgroundColor:
-              selectedCurrency?.code === currency.code
-                ? `${colors.accentGreen}75`
-                : colors.secondaryAccent,
+            backgroundColor: isSelected
+              ? `${colors.accentGreen}75`
+              : colors.secondaryAccent,
             borderColor: colors.secondaryContainerColor,
           },
         ]}
-        key={currency.code}
         onPress={() => handleCurrencySelect(currency)}>
         <View style={styles.symbolContainer}>
           <PrimaryText style={[styles.symbolText, {color: colors.primaryText}]}>
@@ -66,10 +64,11 @@ const CurrenciesPicker = (props: CurrenciesPickerProps) => {
 
   const renderItem = useCallback(
     ({item}: ListRenderItemInfo<Currency>) => {
+      const isSelected = selectedCurrency?.code === item.code;
       return (
         <CurrencyItem
           currency={item}
-          selectedCurrency={selectedCurrency}
+          isSelected={isSelected}
           handleCurrencySelect={handleCurrencySelect}
         />
       );
