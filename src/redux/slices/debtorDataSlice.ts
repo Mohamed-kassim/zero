@@ -21,8 +21,7 @@ export const selectDebtorData = (state: RootState) => state.debtor.debtorData;
 
 export const selectActiveDebtors = createSelector(
   [selectDebtorData],
-  debtorData =>
-    debtorData.filter((debtor: Debtor) => debtor.debtorStatus === true),
+  debtorData => debtorData.filter((debtor: Debtor) => debtor.archived === true),
 );
 
 export const {setDebtorData} = debtorDataSlice.actions;

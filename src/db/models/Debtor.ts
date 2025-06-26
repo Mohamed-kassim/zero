@@ -7,7 +7,7 @@ export const debtorSchema = z.object({
   _id: objectIdSchema,
   title: z.string().min(1),
   type: z.string(),
-  debtorStatus: z.boolean(),
+  archived: z.boolean(),
   user: userSchema.nullable(),
   icon: z.string().optional().nullable(),
   color: z.string().nullable(),
@@ -16,7 +16,7 @@ export const debtorSchema = z.object({
 export type DebtorSchema = z.infer<typeof debtorSchema>;
 
 export const createDebtorSchema = debtorSchema
-  .omit({_id: true, user: true, debtorStatus: true})
+  .omit({_id: true, user: true, archived: true})
   .extend({
     userId: objectIdSchema,
   });
@@ -32,7 +32,7 @@ class Debtor extends Realm.Object<Debtor> {
   _id!: Realm.BSON.ObjectId;
   title!: string;
   type!: string;
-  debtorStatus!: boolean;
+  archived!: boolean;
   user!: User | null;
   icon?: string | null;
   color!: string | null;
@@ -43,7 +43,7 @@ class Debtor extends Realm.Object<Debtor> {
       _id: 'objectId',
       title: 'string',
       type: 'string',
-      debtorStatus: 'bool',
+      archived: 'bool',
       user: 'User',
       icon: {type: 'string', optional: true},
       color: 'string',

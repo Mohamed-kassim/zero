@@ -13,11 +13,20 @@ export const realmConfig: Realm.Configuration = {
     if (oldRealm.schemaVersion < 0.1) {
       const oldCategories = oldRealm.objects('Category');
       const newCategories = newRealm.objects('Category');
+      const oldDebtors = oldRealm.objects('Debtor');
+      const newDebtors = newRealm.objects('Debtor');
+
       for (let index = 0; index < oldCategories.length; index++) {
         const oldCategory = oldCategories[index];
         const newCategory = newCategories[index];
 
         newCategory.archived = oldCategory.categoryStatus;
+      }
+      for (let index = 0; index < oldDebtors.length; index++) {
+        const oldDebtor = oldDebtors[index];
+        const newDebtor = newDebtors[index];
+
+        newDebtor.archived = oldDebtor.debtorStatus;
       }
     }
   },

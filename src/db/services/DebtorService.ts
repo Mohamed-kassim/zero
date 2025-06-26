@@ -16,7 +16,7 @@ export const createDebtor = async (
         realm.create('Debtor', {
           _id: new Realm.BSON.ObjectId(),
           title: debtorTitle,
-          debtorStatus: true,
+          archived: false,
           user: user,
           icon: icon,
           type: debtorType,
@@ -37,8 +37,8 @@ export const softDeleteDebtorById = async (debtorId: Realm.BSON.ObjectId) => {
     realm.write(() => {
       const debtor = realm.objectForPrimaryKey('Debtor', debtorId);
       if (debtor) {
-        if (debtor.debtorStatus) {
-          debtor.debtorStatus = false;
+        if (debtor.archived) {
+          debtor.archived = false;
         }
       } else {
         console.error('Debtor not found.');
